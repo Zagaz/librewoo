@@ -28,14 +28,6 @@ if ( getenv( 'IS_DDEV_PROJECT' ) == 'true' ) {
 	/** Enable debug */
 	defined( 'WP_DEBUG' ) || define( 'WP_DEBUG', true );
 
-
- define( 'WP_DEBUG_LOG', true ); // Write errors to the debug.log file
-define( 'WP_DEBUG_DISPLAY', true); // Disable error display on the front-end
-  
-  
- 
-
-
 	/**
 	 * Set WordPress Database Table prefix if not already set.
 	 *
