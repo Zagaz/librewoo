@@ -12,6 +12,7 @@ function woo_order_complete_message($order_id) {
 
     $woo_client_info = new stdClass();
 
+    $woo_client_info->order_id = $order_id;
     $woo_client_info->customer_name = $order->get_billing_first_name();
     $woo_client_info->customer_last_name = $order->get_billing_last_name();
     $woo_client_info->customer_email = $order->get_billing_email();
