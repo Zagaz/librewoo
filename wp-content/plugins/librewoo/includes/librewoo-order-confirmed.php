@@ -48,12 +48,18 @@ function woo_order_complete_message($order_id) {
         $log_message .= '- ' . $item['name'] . ': ' . $item['quantity'] . ' x ' . $item['total'] . "\n";
     }
 
-    librewoo_trigger($log_message,$woo_client_info);
+    librewoo_trigger($log_message);
+    error_logger($log_message);
 
    
 }
 
-function librewoo_trigger($log_message,$woo_client_info){
+function librewoo_trigger($woo_client_info){
+
+}
+
+function error_logger($log_message){
     error_log($log_message);
+
 }
 
