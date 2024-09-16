@@ -1,28 +1,11 @@
-<?php
+
+<?php 
 /**
- * Plugin Name: Woo Order Complete Message
- * Description: Prints "Woo Completed" message when an order is completed and restricts cart to one product.
- * Version: 1.0.1
- * Author: Your Name
+ * When an order is completed, will trigger a function to start the LibreSign pipeline.
  */
+add_action('woocommerce_order_status_processing', 'librewoo_order_complete_message');
 
-// Exit if accessed directly
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-// add constants.
-
-define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
-
-
-// Hook into WooCommerce order status change to "processing" and trigger the LibreSign pipeline.
-include LW_PLUGIN_DIR .'includes/librewoo-order-confirmed.php';
-
-/*
-add_action('woocommerce_order_status_processing', 'woo_order_complete_message');
-
-function woo_order_complete_message($order_id) {
+function librewoo_order_complete_message($order_id) {
     // Existing code...
 
     // Make an object with all the order data
@@ -50,6 +33,10 @@ function woo_order_complete_message($order_id) {
             'total'    => wc_price($item->get_total()), // Total price (formatted with currency symbol)
         );
     }
+    librewoo_trigger_pipeline($woo_client_info);
+}
+
+function librewoo_trigger_pipeline($woo_client_info){
 
     // Log the order details, including products purchased
     $log_message = 'Payment via ' . $woo_client_info->payment_method . 
@@ -66,25 +53,5 @@ function woo_order_complete_message($order_id) {
     }
 
     error_log($log_message);
+
 }
-
-*/
-
-
-
-
-// Restrict only 1 product in cart. If more than 1 product is added, empty the cart to keep only the last product added.
-
-// add_filter('woocommerce_add_to_cart_validation', 'only_one_product_in_cart', 10, 3);
-
-// function only_one_product_in_cart($passed, $product_id, $quantity) {
-//     if (WC()->cart->get_cart_contents_count() > 0) {
-//         wc_empty_cart();
-//     }
-
-//     return $passed;
-// }
-
-include LW_PLUGIN_DIR .'includes/librewoo-add-to-cart-validation.php';
-
-
