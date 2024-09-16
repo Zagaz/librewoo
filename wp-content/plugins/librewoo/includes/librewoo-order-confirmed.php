@@ -27,6 +27,7 @@ function woo_order_complete_message($order_id) {
     
     foreach ($order->get_items() as $item_id => $item) {
         $woo_client_info->purchased_items[] = array(
+            'id'       => $item->get_id(), //Product ID
             'name'     => $item->get_name(), // Product name
             'quantity' => $item->get_quantity(), // Quantity ordered
             'total'    => wc_price($item->get_total()), // Total price (formatted with currency symbol)
@@ -47,6 +48,12 @@ function woo_order_complete_message($order_id) {
         $log_message .= '- ' . $item['name'] . ': ' . $item['quantity'] . ' x ' . $item['total'] . "\n";
     }
 
+    librewoo_trigger($log_message,$woo_client_info);
+
+   
+}
+
+function librewoo_trigger($log_message,$woo_client_info){
     error_log($log_message);
 }
 
