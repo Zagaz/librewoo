@@ -15,16 +15,27 @@ if (!defined('ABSPATH')) {
 add_action('woocommerce_order_status_processing', 'woo_order_complete_message');
 
 function woo_order_complete_message($order_id) {
-    $order = wc_get_order($order_id);
-    $username = $order->get_billing_first_name();
-    // Log the message to the error log
-    error_log('Woo Completed for Order ID: ' . $order_id. ' for ' . $username);
-    // alert the user with a message
-    // Get user email
+    // Make and object with all the order data
 
-    if( $order->get_status() == 'processing' ) {
-        echo '<div class="woocommerce-message">Woo Completed</div>';
-    }
+    $order = wc_get_order($order_id);
+
+    $woo_client_info = new stdClass();
+
+    $woo_client_info->customer_name = $order->get_billing_first_name() . ' ' . $order->get_billing_last_name();
+    $woo_client_info->customer_email = $order->get_billing_email();
+    $woo_client_info->payment_method = $order->get_payment_method_title(); // e.g., 'PayPal'
+    $woo_client_info->payment_date = $order->get_date_paid(); // Payment date
+    $woo_client_info->transaction_id = $order->get_transaction_id(); // PayPal transaction ID
+    $woo_client_info->customer_ip = $order->get_customer_ip_address(); // Customer IP
+
+  
+   
+
+    error_log(
+        'Payment via' . $woo_client_info->payment_method . ' was completed on ' . $woo_client_info->payment_date . ' for ' . $woo_client_info->customer_name . ' with transaction ID ' . $woo_client_info->transaction_id . ' from IP ' . $woo_client_info->customer_ip 
+    );
+
+
 
 
 }
