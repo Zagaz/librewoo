@@ -10,3 +10,5 @@ function only_one_product_in_cart($passed, $product_id, $quantity) {
 
     return $passed;
 }
+
+

@@ -1,28 +1,4 @@
-[16-Sep-2024 12:57:33 UTC] Woo Completed for Order ID: 64
-[16-Sep-2024 13:19:42 UTC] Woo Completed for Order ID: 66 for Bruce
-[16-Sep-2024 14:54:45 UTC] Payment viaPayPal was completed on 2024-09-16T14:54:45+00:00 for Barry Allen with transaction ID 37992677DA8906058 from IP 172.18.0.1
-[16-Sep-2024 16:42:08 UTC] Automatic updates starting...
-[16-Sep-2024 16:42:10 UTC] Automatic updates complete.
-[16-Sep-2024 16:47:43 UTC] Payment viaPayPal was completed on 2024-09-16T16:47:43+00:00 for Diana Prince with transaction ID 0SX79271VW647415U from IP 172.18.0.1
-[16-Sep-2024 16:50:51 UTC] PHP Parse error:  syntax error, unexpected variable "$woo_client_info" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 27
-[16-Sep-2024 16:54:01 UTC] PHP Parse error:  syntax error, unexpected identifier "error_log" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 42
-[16-Sep-2024 16:54:16 UTC] PHP Parse error:  syntax error, unexpected identifier "error_log" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 42
-[16-Sep-2024 16:56:16 UTC] PHP Parse error:  syntax error, unexpected identifier "error_log" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 42
-[16-Sep-2024 16:58:16 UTC] PHP Parse error:  syntax error, unexpected token ";", expecting ")" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 45
-[16-Sep-2024 17:00:17 UTC] PHP Parse error:  syntax error, unexpected token ";", expecting ")" in /var/www/html/wp-content/plugins/librewoo/librewoo.php on line 50
-[16-Sep-2024 17:06:28 UTC] Payment via PayPal was completed on September 16, 2024 @ 05:06 pm for Peter Parker with transaction ID 9R724543SB589122T from IP 172.18.0.1
-Purchased products:
-- Basic: 1 x <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#82;&#36;</span>&nbsp;50,00</bdi></span>
-
-[16-Sep-2024 18:23:20 UTC] Payment via PayPal was completed on September 16, 2024 @ 06:23 pm for Peter Parker with transaction ID 1EU82107LA430805B from IP 172.18.0.1
-Purchased products:
-- Basic: 1 x <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#82;&#36;</span>&nbsp;50,00</bdi></span>
-
-[16-Sep-2024 18:27:20 UTC] Payment via PayPal was completed on September 16, 2024 @ 06:27 pm for Jean-Luc Picard with transaction ID 5JA72860M88017526 from IP 172.18.0.1
-Purchased products:
-- Pro: 1 x <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#82;&#36;</span>&nbsp;100,00</bdi></span>
-
-[16-Sep-2024 19:22:59 UTC] Payment via PayPal was completed on September 16, 2024 @ 07:22 pm for Andre Ranulfo with transaction ID 01624566UV215930K from IP 172.18.0.1
+[16-Sep-2024 20:18:21 UTC] Payment via PayPal was completed on September 16, 2024 @ 07:55 pm for Nazir Trebor with transaction ID 4E4865087E926951U from IP 172.18.0.1
 Purchased products:
 - Pro: 1 x <span class="woocommerce-Price-amount amount"><bdi><span class="woocommerce-Price-currencySymbol">&#82;&#36;</span>&nbsp;100,00</bdi></span>
 
