@@ -59,19 +59,17 @@ function woo_order_complete_message($order_id) {
 
     error_log($log_message);
 }
-//Once I have one product in the cart, I want to restrict the user from adding more products to the cart.
+// In my woocommerce store, the customer can only have one product in the cart at a time. If he tries to add another products (even the same product), the cart will be emptied and the new product will be added.
 
-add_filter('woocommerce_add_to_cart_validation', 'restrict_cart_to_one_product', 10, 3);
+add_filter('woocommerce_add_to_cart_validation', 'only_one_product_in_cart', 10, 3);
 
-function restrict_cart_to_one_product($passed, $product_id, $quantity) {
-    // If the cart is not empty
+function only_one_product_in_cart($passed, $product_id, $quantity) {
     if (WC()->cart->get_cart_contents_count() > 0) {
-        // Display an error message
-        wc_add_notice(__('You can only have one product in your cart at a time.', 'woocommerce'), 'error');
-        // Return false to prevent the product from being added to the cart
-        return false;
+        wc_empty_cart();
     }
+
     return $passed;
 }
+
 
 
