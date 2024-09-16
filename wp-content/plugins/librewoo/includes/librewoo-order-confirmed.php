@@ -55,6 +55,7 @@ function woo_order_complete_message($order_id) {
 }
 
 function librewoo_trigger($woo_client_info){
+    // Here triggers the LibreSign pipeline.
 
 }
 
