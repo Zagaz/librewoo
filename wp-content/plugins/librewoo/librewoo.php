@@ -19,6 +19,10 @@ define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 include LW_PLUGIN_DIR . 'includes/librewoo-order-confirmed.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 
+new WooOneProductCart();
+new WooOrderComplete();
+
+
 
 
 
