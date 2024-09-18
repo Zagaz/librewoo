@@ -1,4 +1,8 @@
 <?php 
+// Prevent direct file access
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly
+}
 
 class WooOneProductCart {
     
@@ -8,6 +12,14 @@ class WooOneProductCart {
     }
 
     public function validate_single_product($passed, $product_id, $quantity) {
+        // Validate product ID and quantity
+        $product_id = absint($product_id);
+        $quantity = absint($quantity);
+
+        if (!$product_id || !$quantity) {
+            return false; // Invalid product ID or quantity
+        }
+
         // If there's more than one product in the cart, empty it
         if (WC()->cart->get_cart_contents_count() > 0) {
             $this->empty_cart();
@@ -21,6 +33,3 @@ class WooOneProductCart {
         wc_empty_cart();
     }
 }
-
-
-

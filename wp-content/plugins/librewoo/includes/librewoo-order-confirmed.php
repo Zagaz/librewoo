@@ -1,6 +1,8 @@
 <?php 
-// Initialize the class
-
+// You shall not pass!
+if (!defined('ABSPATH')) {
+    exit;
+}
 
 
 class WooOrderComplete {
@@ -10,7 +12,17 @@ class WooOrderComplete {
     }
 
     public function order_complete_message($order_id) {
-        // Make an object with all the order data
+
+        // Ensure the order ID is valid     
+        $order_id = absint($order_id);
+       
+        if (!$order_id) {
+            return;
+        }
+        if (!is_numeric($order_id)){
+            return;
+        }
+
         $order = wc_get_order($order_id);
         $woo_client_info = $this->get_order_data($order, $order_id);
 
