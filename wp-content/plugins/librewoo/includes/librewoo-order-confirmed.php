@@ -30,29 +30,51 @@ class WooOrderComplete {
         $log_message = $this->create_log_message($woo_client_info);
         
         // Trigger LibreSign pipeline
-        $this->librewoo_trigger($log_message);
+        //$this->librewoo_trigger($log_message);
         
         // Log the message
-        $this->error_logger($log_message);
+        //$this->error_logger($log_message);
+
+       
+        $this->librewoo_trigger($woo_client_info);
+
+        // get get_order_data() and store in a variable.
+
+        $order_id = $order->get_id();
+
+        $test = $this->get_order_data($order_id);
+        $this->librewoo_trigger($test);
+
+
     }
 
-    private function get_order_data($order, $order_id) {
+    private function get_order_data($order_id) {
+        $order= $order_id;
         $woo_client_info = new stdClass();
-
+        //Id do pedido
         $woo_client_info->order_id = $order_id;
-        $woo_client_info->customer_name = $order->get_billing_first_name();
+        // Informações do cliente - Primeiro nome
+        //$woo_client_info->customer_name = $order->get_billing_first_name();
+        // Informações do cliente - Sobrenome
         $woo_client_info->customer_last_name = $order->get_billing_last_name();
+        // Informações do cliente - E-mail
         $woo_client_info->customer_email = $order->get_billing_email();
+        // Informações do cliente - Telefone
         $woo_client_info->customer_phone = $order->get_billing_phone();
+        // Informações do cliente - Endereço
         $woo_client_info->payment_method = $order->get_payment_method_title(); // e.g., 'PayPal'
+        // Informações do cliente - Data de pagamento
         $payment_date = $order->get_date_paid();
+        // Data do pagamento formatada
         $woo_client_info->payment_date = $payment_date ? $payment_date->date('F j, Y @ h:i a') : 'Not paid yet'; // Format the date
+        // Informações do cliente - ID da transação
         $woo_client_info->transaction_id = $order->get_transaction_id(); // PayPal transaction ID
+        // Informações do cliente - IP
         $woo_client_info->customer_ip = $order->get_customer_ip_address(); // Customer IP
 
         // Retrieve purchased items
         $woo_client_info->purchased_items = [];
-
+        /// Loop through each order item
         foreach ($order->get_items() as $item_id => $item) {
             $woo_client_info->purchased_items[] = [
                 'id'       => $item->get_id(), // Product ID
@@ -82,14 +104,30 @@ class WooOrderComplete {
         return $log_message;
     }
 
-    private function librewoo_trigger($log_message) {
-        // Here triggers the LibreSign pipeline.
-        // You can use the log message or order details.
+   
+        
+    private function librewoo_trigger($order_data) {
+
+        
+        $array = get_object_vars($order_data);
+        
+
+        // print the array
+
+        echo '<pre>';
+        print_r($array['transaction_id']);
+        echo '</pre>';
+
+   
+
+
+     
     }
 
-    private function error_logger($log_message) {
-        error_log($log_message);
+
+
     }
-}
+
+   
 
 
