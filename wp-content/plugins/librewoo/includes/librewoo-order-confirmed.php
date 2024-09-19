@@ -31,29 +31,28 @@ class WooOrderComplete
             return;
         }
 
-
         /**
          * Get order data from WooCommerce order object
          * Data: customer name, customer email, purchased items
          * 
          */
         $this->get_order_data(wc_get_order($order_id));
-        
+
         $this->librewoo_trigger($this->get_order_data(wc_get_order($order_id)));
     }
 
-/**
- * Get order data from WooCommerce order object
- * Data: customer name, customer email, purchased items
- * 
- * @param WC_Order $order
- * @return stdClass
- * @since 1.0.0
- */ 
+    /**
+     * Get order data from WooCommerce order object
+     * Data: customer name, customer email, purchased items
+     * 
+     * @param WC_Order $order
+     * @return stdClass
+     * @since 1.0.0
+     */
     private function get_order_data($order_id)
     {
         $order = $order_id;
-        
+
         $woo_client_info = new stdClass();
         $woo_client_info->customer_name = $order->get_billing_first_name();
         $woo_client_info->customer_last_name = $order->get_billing_last_name();
@@ -73,24 +72,25 @@ class WooOrderComplete
         return $woo_client_info;
     }
 
-
-
-
-/**
- *
- * Trigger LibreSign API
- * @return void
- * @since 1.0.0
- */
+    /**     
+     * Trigger LibreSign API
+     * @return void
+     * @since 1.0.0
+     */
     private function librewoo_trigger($order_data)
     {
-
-
+        //Convert stdClass to array
         $order_data = get_object_vars($order_data);
-
-        // $email = $order_data['customer_email'];
-        // $name = $order_data['customer_name'] . ' '. $order_data['customer_last_name'];         
-        // $quota = $order_data['purchased_items'][0]['name'];
-
+        $email = $order_data['customer_email'];
+        $name = $order_data['customer_name'] . ' '. $order_data['customer_last_name'];         
+        $quota = $order_data['purchased_items'][0]['name'];
+        
+        error_log(
+            'librewoo Triggered: ' . PHP_EOL .
+                'Email: ' . $email . PHP_EOL .
+                'Name: ' . $name . PHP_EOL .
+                'Quota: ' . $quota . PHP_EOL .
+                '------------------------' . PHP_EOL
+        );
     }
 }
