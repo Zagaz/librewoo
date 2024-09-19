@@ -84,13 +84,31 @@ class WooOrderComplete
         $email = $order_data['customer_email'];
         $name = $order_data['customer_name'] . ' '. $order_data['customer_last_name'];         
         $quota = $order_data['purchased_items'][0]['name'];
+        $this->librewoo_trigger_log($email, $name, $quota);
+  
+
+    }
+
+     function librewoo_trigger_log($email,$name,$quota){
+
+        // check email true?
+        $email ? $email : false;
+        $name ? $name : false;
+        $quota ? $quota : false;
+
+        if ($email && $name && $quota) {
+      
+            error_log(
+                sprintf(
+                    'LibreSign API triggered for %s with Email: %s and Quota: %s',
+                    $name,
+                    $email,
+                    $quota
+                )
+            );
+        } else {
+            error_log('LibreSign API not triggered');
+        }
         
-        error_log(
-            'librewoo Triggered: ' . PHP_EOL .
-                'Email: ' . $email . PHP_EOL .
-                'Name: ' . $name . PHP_EOL .
-                'Quota: ' . $quota . PHP_EOL .
-                '------------------------' . PHP_EOL
-        );
     }
 }

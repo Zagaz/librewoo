@@ -4,3 +4,6 @@ Name: Paypal Sandbox
 Quota: Basic
 ------------------------
 
+[19-Sep-2024 20:40:34 UTC] PHP Parse error:  syntax error, unexpected token ";" in /var/www/html/wp-content/plugins/librewoo/includes/librewoo-order-confirmed.php on line 101
+[19-Sep-2024 20:42:34 UTC] PHP Parse error:  syntax error, unexpected token "}" in /var/www/html/wp-content/plugins/librewoo/includes/librewoo-order-confirmed.php on line 103
+[19-Sep-2024 20:45:58 UTC] LibreSign API triggered for Paypal Sandbox with email sb-r4x6y29153742@personal.example.com and quota Basic
