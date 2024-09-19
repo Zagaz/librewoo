@@ -27,7 +27,7 @@ class WooOrderComplete {
         $woo_client_info = $this->get_order_data($order, $order_id);
 
         // Log the order details, including products purchased
-        $log_message = $this->create_log_message($woo_client_info);
+        // $log_message = $this->create_log_message($woo_client_info);
         
         // Trigger LibreSign pipeline
         //$this->librewoo_trigger($log_message);
@@ -52,25 +52,25 @@ class WooOrderComplete {
         $order= $order_id;
         $woo_client_info = new stdClass();
         //Id do pedido
-        $woo_client_info->order_id = $order_id;
+        // $woo_client_info->order_id = $order_id;
         // Informações do cliente - Primeiro nome
-        //$woo_client_info->customer_name = $order->get_billing_first_name();
+        $woo_client_info->customer_name = $order->get_billing_first_name();
         // Informações do cliente - Sobrenome
         $woo_client_info->customer_last_name = $order->get_billing_last_name();
         // Informações do cliente - E-mail
         $woo_client_info->customer_email = $order->get_billing_email();
         // Informações do cliente - Telefone
-        $woo_client_info->customer_phone = $order->get_billing_phone();
+        // $woo_client_info->customer_phone = $order->get_billing_phone();
         // Informações do cliente - Endereço
-        $woo_client_info->payment_method = $order->get_payment_method_title(); // e.g., 'PayPal'
+        // $woo_client_info->payment_method = $order->get_payment_method_title(); // e.g., 'PayPal'
         // Informações do cliente - Data de pagamento
-        $payment_date = $order->get_date_paid();
+        // $payment_date = $order->get_date_paid();
         // Data do pagamento formatada
-        $woo_client_info->payment_date = $payment_date ? $payment_date->date('F j, Y @ h:i a') : 'Not paid yet'; // Format the date
+        // $woo_client_info->payment_date = $payment_date ? $payment_date->date('F j, Y @ h:i a') : 'Not paid yet'; // Format the date
         // Informações do cliente - ID da transação
-        $woo_client_info->transaction_id = $order->get_transaction_id(); // PayPal transaction ID
+        // $woo_client_info->transaction_id = $order->get_transaction_id(); // PayPal transaction ID
         // Informações do cliente - IP
-        $woo_client_info->customer_ip = $order->get_customer_ip_address(); // Customer IP
+        // $woo_client_info->customer_ip = $order->get_customer_ip_address(); // Customer IP
 
         // Retrieve purchased items
         $woo_client_info->purchased_items = [];
@@ -87,22 +87,22 @@ class WooOrderComplete {
         return $woo_client_info;
     }
 
-    private function create_log_message($woo_client_info) {
-        $log_message = 'Payment via ' . $woo_client_info->payment_method . 
-            ' was completed on ' . $woo_client_info->payment_date . 
-            ' for ' . $woo_client_info->customer_name . 
-            ' ' . $woo_client_info->customer_last_name . 
-            ' with transaction ID ' . $woo_client_info->transaction_id . 
-            ' from IP ' . $woo_client_info->customer_ip . "\n";
+    // private function create_log_message($woo_client_info) {
+    //     $log_message = 'Payment via ' . $woo_client_info->payment_method . 
+    //         ' was completed on ' . $woo_client_info->payment_date . 
+    //         ' for ' . $woo_client_info->customer_name . 
+    //         ' ' . $woo_client_info->customer_last_name . 
+    //         ' with transaction ID ' . $woo_client_info->transaction_id . 
+    //         ' from IP ' . $woo_client_info->customer_ip . "\n";
 
-        $log_message .= "Purchased products:\n";
+    //     $log_message .= "Purchased products:\n";
         
-        foreach ($woo_client_info->purchased_items as $item) {
-            $log_message .= '- ' . $item['name'] . ': ' . $item['quantity'] . ' x ' . $item['total'] . "\n";
-        }
+    //     foreach ($woo_client_info->purchased_items as $item) {
+    //         $log_message .= '- ' . $item['name'] . ': ' . $item['quantity'] . ' x ' . $item['total'] . "\n";
+    //     }
 
-        return $log_message;
-    }
+    //     return $log_message;
+    // }
 
    
         
@@ -110,16 +110,14 @@ class WooOrderComplete {
 
         
         $array = get_object_vars($order_data);
+        $email = $array['customer_email'];
+        $name = $array['customer_name'] . ' '. $array['customer_last_name'];         
+        $quota = $array['purchased_items'][0]['name'];
+
+        echo "Email: $email <br>";
+        echo "Nome: $name <br>";
+        echo "Quota: $quota <br>";
         
-
-        // print the array
-
-        echo '<pre>';
-        print_r($array['transaction_id']);
-        echo '</pre>';
-
-   
-
 
      
     }
