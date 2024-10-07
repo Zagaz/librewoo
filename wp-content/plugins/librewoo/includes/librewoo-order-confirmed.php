@@ -91,11 +91,12 @@ class WooOrderComplete
 
      function librewoo_trigger_log($email,$name,$quota){
 
-        // check email true?
+        // Validate email, name and quota
         $email ? $email : false;
         $name ? $name : false;
         $quota ? $quota : false;
 
+        // Logs
         if ($email && $name && $quota) {
       
             error_log(
@@ -110,7 +111,6 @@ class WooOrderComplete
                 'email' => $email,
                 'quota' => $quota
             );
-                // Check $variables array and print if false
                 foreach ($variables as $key => $value) {
                     if (!$value) {
                         error_log(
@@ -122,6 +122,8 @@ class WooOrderComplete
                     }
                 }   
         }
+
+        // TRIGGER LibreSign API HERE
         
     }
 }
