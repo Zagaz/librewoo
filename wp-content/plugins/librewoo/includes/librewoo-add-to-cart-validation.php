@@ -4,6 +4,14 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+/*
+    * Class WooOneProductCart
+    * Limits only one product in the cart
+    * 
+    * @since 1.0.0
+    *
+    */
+    
 class WooOneProductCart {
     
     public function __construct() {

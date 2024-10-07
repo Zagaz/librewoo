@@ -7,6 +7,8 @@ if (!defined('ABSPATH')) {
 /**
  * Class WooOrderComplete
  * 
+ * Triggers LibreSign API when an order is completed
+ * 
  * 
  * @since 1.0.0
  */
