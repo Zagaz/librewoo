@@ -1,0 +1,3 @@
+[07-Oct-2024 18:41:15 UTC] LibreSign API triggered for Paypal Sandbox with Email: sb-r4x6y29153742@personal.example.com and Quota: Pro
+[07-Oct-2024 18:46:22 UTC] PHP Parse error:  syntax error, unexpected token "(", expecting ":" in /var/www/html/wp-content/plugins/librewoo/includes/librewoo-order-confirmed.php on line 110
+[07-Oct-2024 18:46:24 UTC] PHP Parse error:  syntax error, unexpected token "(", expecting ":" in /var/www/html/wp-content/plugins/librewoo/includes/librewoo-order-confirmed.php on line 110

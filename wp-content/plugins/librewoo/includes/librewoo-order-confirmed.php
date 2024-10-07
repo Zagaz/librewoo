@@ -100,14 +100,27 @@ class WooOrderComplete
       
             error_log(
                 sprintf(
-                    'LibreSign API triggered for %s with Email: %s and Quota: %s',
-                    $name,
-                    $email,
-                    $quota
+                    'LibreSign: Name: %s Email: %s Quota: %s',
+                    $name, $email, $quota
                 )
             );
         } else {
-            error_log('LibreSign API not triggered');
+            $variables = array(
+                'name' => $name,
+                'email' => $email,
+                'quota' => $quota
+            );
+                // Check $variables array and print if false
+                foreach ($variables as $key => $value) {
+                    if (!$value) {
+                        error_log(
+                            sprintf(
+                                'LibreSign: Missing %s',
+                                $key
+                            )
+                        );
+                    }
+                }   
         }
         
     }
