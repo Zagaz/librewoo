@@ -107,6 +107,7 @@ class WooOrderComplete
                     $name, $email, $quota
                 )
             );
+            
         } else {
             $variables = array(
                 'name' => $name,
