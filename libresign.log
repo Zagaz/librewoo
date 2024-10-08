@@ -1,0 +1,10 @@
+groupid: groupid
+display_name: Andre Ranulfo
+quota: Pro
+apps: apps
+authorization: authorization
+groupid: andre_ranulfo@hotmail.com
+display_name: Andre Ranulfo
+quota: Basic
+apps: files
+authorization: admin

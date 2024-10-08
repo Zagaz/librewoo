@@ -4,6 +4,8 @@ if (!defined("ABSPATH")) {
     exit();
 }
 
+include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
+
 /**
  * Class WooOrderComplete
  *
@@ -86,12 +88,19 @@ class WooOrderComplete
         //Convert stdClass to array
         $order_data = get_object_vars($order_data);
         $email = $order_data["customer_email"];
-        $name =
+        $display_name =
             $order_data["customer_name"] .
             " " .
             $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
-        $this->librewoo_trigger_log($email, $name, $quota);
+
+
+        //$is_validated = $this->librewoo_trigger_log($email,  $display_name , $quota);
+
+        new LibreSignEndpoint($email, $display_name, $quota, "files", "admin");
+
+       
+      
     }
 
     function librewoo_trigger_log($email, $name, $quota)
@@ -103,6 +112,7 @@ class WooOrderComplete
 
         // Logs
         if ($email && $name && $quota) {
+           
             error_log(
                 sprintf(
                     "LibreSign: Name: %s Email: %s Quota: %s",
@@ -111,6 +121,7 @@ class WooOrderComplete
                     $quota
                 )
             );
+            return true;
         } else {
             $variables = [
                 "name" => $name,
@@ -122,6 +133,7 @@ class WooOrderComplete
                     error_log(sprintf("LibreSign: Missing %s", $key));
                 }
             }
+            return false;
         }
 
         // TRIGGER LibreSign API HERE
