@@ -7,6 +7,7 @@ class LibreSignEndpoint
     private $quota;
     private $apps;
     private $authorization;
+    
 
     public  function __construct($groupid, $display_name , $quota, $apps, $authorization)
     {
