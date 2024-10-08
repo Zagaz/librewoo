@@ -16,16 +16,11 @@ class LibreSignEndpoint
         $this->quota = $quota;
         $this->apps = $apps;
         $this->authorization = $authorization;
-        // call logData method
-        $this->logData();
-        // call triggerAPI method'
-        $this->triggerAPI();
-
-       
 
     }
 
-     private function triggerAPI() {
+     public function triggerAPI() {
+        
         $url = 'http://localhost/ocs/v2.php/apps/admin_group_manager/api/v1/admin-group';
         
         $body = [
@@ -46,34 +41,28 @@ class LibreSignEndpoint
             'body'    => json_encode($body),
             'headers' => $headers,
         ]);
-
+        
         if (is_wp_error($response)) {
             return 'Erro: ' . $response->get_error_message();
-        } else{
-            // error_log the response
-            error_log(wp_remote_retrieve_body($response));
-        }
-        
-      
-
-
+        }       
+       
         return wp_remote_retrieve_body($response);
-
+        
     }
 
+    
 
-
-    private function logData()
-    {
-        error_log(
-            sprintf(
-                "||| LibreSign: Name: %s Email: %s Quota: %s",
-                $this->display_name,
-                $this->groupid,
-                $this->quota
-            )
-        );
-    }
+    // private function logData()
+    // {
+    //     error_log(
+    //         sprintf(
+    //             "||| LibreSign: Name: %s Email: %s Quota: %s",
+    //             $this->display_name,
+    //             $this->groupid,
+    //             $this->quota
+    //         )
+    //     );
+    // }
 
 }
 
