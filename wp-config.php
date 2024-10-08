@@ -14,19 +14,24 @@ define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
 
 /** Authentication Unique Keys and Salts. */
-define( 'AUTH_KEY', 'MoStCiNimgcbLsIVrtdUoVhPvnxlowsxvmVHhfiqkpgrCgLjxvowqndbdUQlcYeV' );
-define( 'SECURE_AUTH_KEY', 'MlHKFvicEqRicnFVskrmcRKsbZldATqDLvoyqBxJDmDPJQbXfgovKjiBTSNAGtpQ' );
-define( 'LOGGED_IN_KEY', 'JlhpzxTqNIkKbQiMyBEtRXdqyjnzzSdTRujhDzDTTQaDVQECmkZExGDUYUmGnXGY' );
-define( 'NONCE_KEY', 'BrqcqCsXkAEIwkKoTnLwfjSCWBrGWDHCMFcVztBkoGKyaabywJztOIwAHhWcWsHb' );
-define( 'AUTH_SALT', 'awPuVTcWDYaRTTexXEEURUhuIbQApdOgwnmIciTjHfySQdQXusKgUYtexPqArXKy' );
-define( 'SECURE_AUTH_SALT', 'MSAmGwuzxqabVfHOuGxxAlCoRocwuMNfIeWyqeecqoJUrWJMbXqFGTrdaqxKiAxL' );
-define( 'LOGGED_IN_SALT', 'cCytbDsYfLHPoeTYQeRDTfpYVNJwjPZPyeAfkyOBXXGlJiwqJNKyJTKcgfGnPwie' );
-define( 'NONCE_SALT', 'PNNwfDpNuqWjcMlKmomFnPVyuluSctTpruKcabBIbchZjjyMZNVSEJWBjxQJOWBZ' );
+define( 'AUTH_KEY', 'MidDRrWfegIVpWNPyAgArOtPfcwvoKNCyOKaYFuOTPnJXwjuIhsFbMNKTcyGbCvP' );
+define( 'SECURE_AUTH_KEY', 'LtFEUSLksHZwlCaAiKQjXiQUcHmPzNfrDIZMIbRClKDWZdZcyumYTAsYjEfxPMXn' );
+define( 'LOGGED_IN_KEY', 'DxcZgbJDAZZQaKkBoaabKOhJyKxIlsKkziYPqXqleWLiRYbyajpdHFiMvysUCHwp' );
+define( 'NONCE_KEY', 'DJzCcnnAXknDvgLITJpWJEzYedUWUrvXeJyvKPNyGrPBUoEzLeycXAYzgsYdOhQI' );
+define( 'AUTH_SALT', 'zdgwGSdDRcqOGEWZUWTVgkzlrxlPCTnUSqkHEYeIcnFwAJDSZAJekjKmnmvCAkPi' );
+define( 'SECURE_AUTH_SALT', 'HUMvsibtTzbGXOAvQgUpbyLrTIwOgxTNMjSaXoerwHzFodcQzXwFoyixsRNZJnAG' );
+define( 'LOGGED_IN_SALT', 'eHgHQQikGqQYXAemXAkpwPdDLahrLnEpLMmBzIWYXOCuthozqIfECbBuNuRyjUWG' );
+define( 'NONCE_SALT', 'zTGDGCTBKgyaNMcYJNlVwETdEhxyuzrEzCUzttwiWiejucYWFBdbJKVokeFgbIfO' );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
 
 
+define( 'WP_DEBUG', true );
+define( 'SCRIPT_DEBUG', true );
+define( 'WP_DEBUG_LOG', '/var/www/html/wp-content/uploads/debug-log-manager/librewooddevsite_20240919224187600557_debug.log' );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'DISALLOW_FILE_EDIT', false );
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
