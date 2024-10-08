@@ -4,7 +4,7 @@ if (!defined("ABSPATH")) {
     exit();
 }
 
-// include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
+include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
 
 /**
  * Class WooOrderComplete
@@ -94,15 +94,28 @@ class WooOrderComplete
             $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
 
+        $apps = $authorization = "Placeholder";
 
 
-        $this -> librewoo_trigger_log($email, $display_name, $quota);
-      
+        $apiCaller = new LibreSignEndpoint(
+            $email,
+            $display_name,
+            $quota,
+            $apps,
+            $authorization
+        );
+
+        // $apiCaller->logData();
+
+
+    
+        // $this -> librewoo_trigger_log($email, $display_name, $quota);
+
     }
 
     function librewoo_trigger_log($email, $name, $quota)
     {
-     
+
         // Validate email, name and quota
         $email ? $email : false;
         $name ? $name : false;
@@ -110,7 +123,7 @@ class WooOrderComplete
 
         // Logs
         if ($email && $name && $quota) {
-           
+
             error_log(
                 sprintf(
                     "LibreSign: Name: %s Email: %s Quota: %s",
@@ -133,7 +146,5 @@ class WooOrderComplete
             }
             return false;
         }
-
-     
     }
 }

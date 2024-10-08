@@ -7,7 +7,7 @@ class LibreSignEndpoint
     private $quota;
     private $apps;
     private $authorization;
-    
+
 
     public  function __construct($groupid, $display_name , $quota, $apps, $authorization)
     {
@@ -16,14 +16,17 @@ class LibreSignEndpoint
         $this->quota = $quota;
         $this->apps = $apps;
         $this->authorization = $authorization;
-
+        // call logData method
         $this->logData();
+
+       
+
     }
 
 
-
-    private function logData(){
+public function logData(){
         // logo all data to a file
+        $log = "API call data: \n";
         $log = "groupid: " . $this->groupid . "\n";
         $log .= "display_name: " . $this->display_name . "\n";
         $log .= "quota: " . $this->quota . "\n";
