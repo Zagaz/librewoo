@@ -23,3 +23,13 @@ display_name: Andre Ranulfo
 quota: Pro
 apps: Placeholder
 authorization: Placeholder
+groupid: sb-r4x6y29153742@personal.example.com
+display_name: Paypal Sandbox
+quota: Pro
+apps: Placeholder
+authorization: Placeholder
+groupid: andre_ranulfo@hotmail.com
+display_name: Andre Ranulfo
+quota: Basic
+apps: Placeholder
+authorization: Placeholder
