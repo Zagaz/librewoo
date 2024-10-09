@@ -15,12 +15,17 @@ include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
  */
 class WooOrderComplete
 {
+    private $order_id;
+
     public function __construct()
     {
+
         add_action("woocommerce_order_status_processing", [
             $this,
             "order_complete_message",
         ]);
+        // setter getter 
+
     }
 
     public function order_complete_message($order_id)
@@ -34,6 +39,7 @@ class WooOrderComplete
 
         // Get the order object
         $order = wc_get_order($order_id);
+        $this->order_id = $order_id;
         if (!$order) {
             return;
         }
@@ -85,15 +91,12 @@ class WooOrderComplete
         $display_name = $order_data["customer_name"] . " " . $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
         $apps = $authorization = "Placeholder";
-
         // Trigger LibreSign API
         $apiCall = new LibreSignEndpoint($email, $display_name, $quota, $apps, $authorization);
         $apiCall->triggerAPI();
-
-        // Log 
+        //Log
         $logger = wc_get_logger();
         $context_librewoo_order_confirmed = array('source' => 'librewoo-order-confirmed');
-        $logger->info("Triggered LibreSign API for order: $order_data", $context_librewoo_order_confirmed);
-        
+        $logger->info("API triggered", $context_librewoo_order_confirmed);
     }
 }
