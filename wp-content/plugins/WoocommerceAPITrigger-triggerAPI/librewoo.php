@@ -20,21 +20,15 @@ include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 new WooOneProductCart();
 new WooOrderComplete();
 
+add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to_handle_cancellation', 10, 1);
 
-// call subscription cancelation hook
+function your_custom_function_to_handle_cancellation($subscription) {
 
-add_action('woocommerce_subscription_status_cancelled', 'log_subscription_id_on_cancelation');
-
-add_action('woocommerce_subscription_status_pending', 'log_subscription_id_on_pending', 10, 1);
-
-function log_subscription_id_on_pending($subscription) {
-    // Obter ID da assinatura
-    $subscription_id = $subscription->get_id();
-
-    // Registrar o ID da assinatura no log
-    error_log('Assinatura ' . $subscription_id . ' está agora pendente.');
+    // Your custom logic here
+    $log = wc_get_logger();
+    $context = array('source' => 'TEST');
+    $log->info('Subscription Cancelled: ' . $subscription->get_id() , $context);
 }
-
 
 
 
