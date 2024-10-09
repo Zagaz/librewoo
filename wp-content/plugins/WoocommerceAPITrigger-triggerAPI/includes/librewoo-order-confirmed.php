@@ -90,13 +90,10 @@ class WooOrderComplete
         $apiCall = new LibreSignEndpoint($email, $display_name, $quota, $apps, $authorization);
         $apiCall->triggerAPI();
 
-        // Log the API call
+        // Log 
         $logger = wc_get_logger();
-        $context = array('source' => 'librewoo-order-confirmed');
-        $logger->info("Triggered LibreSign API for order: $order_data", $context);
-        // $logger->info("API response: $apiCall", $context);
-
-        // where the logs are stores?
+        $context_librewoo_order_confirmed = array('source' => 'librewoo-order-confirmed');
+        $logger->info("Triggered LibreSign API for order: $order_data", $context_librewoo_order_confirmed);
         
     }
 }
