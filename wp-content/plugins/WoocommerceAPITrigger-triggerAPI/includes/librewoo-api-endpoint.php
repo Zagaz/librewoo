@@ -52,9 +52,9 @@ class LibreSignEndpoint
 
         // json_encode($response);
 
-        // $logger = wc_get_logger();
-        // $context = array('source' => 'LibreSignAPIResponse');
-        // $logger->info("API Response:  $response", $context);
+        $logger = wc_get_logger();
+        $context = array('source' => 'LibreSignAPIResponse.php');
+        $logger->info("API Response:  $response", $context);
 
      
        
