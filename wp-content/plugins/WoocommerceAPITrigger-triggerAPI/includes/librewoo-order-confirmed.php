@@ -11,10 +11,8 @@ include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
  *
  * Triggers LibreSign API when an order is completed
  *
- *
  * @since 1.0.0
  */
-
 class WooOrderComplete
 {
     public function __construct()
@@ -30,21 +28,19 @@ class WooOrderComplete
         // Ensure the order ID is valid
         $order_id = absint($order_id);
 
-        if (!$order_id) {
-            return;
-        }
-        if (!is_numeric($order_id)) {
+        if (!$order_id || !is_numeric($order_id)) {
             return;
         }
 
-        /**
-         * Get order data from WooCommerce order object
-         * Data: customer name, customer email, purchased items
-         *
-         */
-        $this->get_order_data(wc_get_order($order_id));
+        // Get the order object
+        $order = wc_get_order($order_id);
+        if (!$order) {
+            return;
+        }
 
-        $this->librewoo_trigger($this->get_order_data(wc_get_order($order_id)));
+        // Get order data and trigger API
+        $order_data = $this->get_order_data($order);
+        $this->librewoo_trigger($order_data);
     }
 
     /**
@@ -55,17 +51,15 @@ class WooOrderComplete
      * @return stdClass
      * @since 1.0.0
      */
-    private function get_order_data($order_id)
+    private function get_order_data($order)
     {
-        $order = $order_id;
-
         $woo_client_info = new stdClass();
         $woo_client_info->customer_name = $order->get_billing_first_name();
         $woo_client_info->customer_last_name = $order->get_billing_last_name();
         $woo_client_info->customer_email = $order->get_billing_email();
         // Retrieve purchased items
         $woo_client_info->purchased_items = [];
-        /// Loop through each order item
+        // Loop through each order item
         foreach ($order->get_items() as $item_id => $item) {
             $woo_client_info->purchased_items[] = [
                 "id" => $item->get_id(), // Product ID
@@ -85,68 +79,23 @@ class WooOrderComplete
      */
     private function librewoo_trigger($order_data)
     {
-        //Convert stdClass to array
+        // Convert stdClass to array
         $order_data = get_object_vars($order_data);
         $email = $order_data["customer_email"];
-        $display_name =
-            $order_data["customer_name"] .
-            " " .
-            $order_data["customer_last_name"];
+        $display_name = $order_data["customer_name"] . " " . $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
-
         $apps = $authorization = "Placeholder";
 
-
-        $apiCall = new LibreSignEndpoint(
-            $email,
-            $display_name,
-            $quota,
-            $apps,
-            $authorization
-        );
-
+        // Trigger LibreSign API
+        $apiCall = new LibreSignEndpoint($email, $display_name, $quota, $apps, $authorization);
         $apiCall->triggerAPI();
 
-        // $apiCaller->logData();
+        // Log the API call
+        $logger = wc_get_logger();
+        $context = array('source' => 'librewoo-order-confirmed');
+        $logger->info("Triggered LibreSign API for order: $email", $context);
 
-
-    
-        // $this -> librewoo_trigger_log($email, $display_name, $quota);
-
+        // where the logs are stores?
+        
     }
-
-    // function librewoo_trigger_log($email, $name, $quota)
-    // {
-
-    //     // Validate email, name and quota
-    //     $email ? $email : false;
-    //     $name ? $name : false;
-    //     $quota ? $quota : false;
-
-    //     // Logs
-    //     if ($email && $name && $quota) {
-
-    //         error_log(
-    //             sprintf(
-    //                 "LibreSign: Name: %s Email: %s Quota: %s",
-    //                 $name,
-    //                 $email,
-    //                 $quota
-    //             )
-    //         );
-    //         return true;
-    //     } else {
-    //         $variables = [
-    //             "name" => $name,
-    //             "email" => $email,
-    //             "quota" => $quota,
-    //         ];
-    //         foreach ($variables as $key => $value) {
-    //             if (!$value) {
-    //                 error_log(sprintf("LibreSign: Missing %s", $key));
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
 }
