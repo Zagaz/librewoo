@@ -46,27 +46,21 @@ class LibreSignEndpoint
         
         if (is_wp_error($response)) {
             return 'Erro: ' . $response->get_error_message();
-        }  
+        }
         
-        json_encode($response);
-        $logger = wc_get_logger();
-        $context = array('source' => 'LibreSignAPIResponse');
-        $logger->info("Response:  $response", $context);
+        
+
+        // json_encode($response);
+
+        // $logger = wc_get_logger();
+        // $context = array('source' => 'LibreSignAPIResponse');
+        // $logger->info("API Response:  $response", $context);
 
      
        
         return wp_remote_retrieve_body($response);
         
     }
-
-    // function that logs this class
-
-   
-    
-
-    
-
-    // private function logData()
     // {
     //     error_log(
     //         sprintf(
