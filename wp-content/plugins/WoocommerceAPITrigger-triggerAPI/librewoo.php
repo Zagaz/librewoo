@@ -28,5 +28,5 @@ add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to
 function your_custom_function_to_handle_cancellation($subscription)
 {
     $unsubscribe = new LibreSignEndpoint();
-    $unsubscribe->unsubscribe_libreSign();
+    $unsubscribe->unsubscribe_libreSign($subscription);
 }
