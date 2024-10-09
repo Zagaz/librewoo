@@ -8,40 +8,25 @@ class LibreSignEndpoint
     private $apps;
     private $authorization;
 
+    private $transaction;
 
-    public  function __construct($groupid, $display_name , $quota, $apps, $authorization)
+
+
+    public function __construct()
     {
-        $this->groupid = $groupid;
-        $this->display_name = $display_name;
-        $this->quota = $quota;
-        $this->apps = $apps;
-        $this->authorization = $authorization;
-
-    }
-
-     public function triggerAPI($transaction) {
-
-        if ($transaction == "subscription") {
-            $this->subscribe_libreSign();
-        } 
-        if ($transaction == "unscription") {
-            $this->unsubscribe_libreSign();
-        }
-               
-        
-    }
-
-    private function unsubscribe_libreSign(){
-        $logger = wc_get_logger();
-        $context = array('source' => 'UNsubscribe---');
-        $logger->info("He's dead, Jim.", $context);
-        
     
     }
-    
-    private function subscribe_libreSign(){
+
+    public function unsubscribe_libreSign()
+    {
+
+        $this->logAPI("He's dead, Jim.");
+    }
+
+    public function subscribe_libreSign()
+    {
         $url = 'http://localhost/ocs/v2.php/apps/admin_group_manager/api/v1/admin-group';
-        
+
         $body = [
             'groupid'     => $this->groupid,
             'displayname' => $this->display_name,
@@ -61,26 +46,23 @@ class LibreSignEndpoint
             'headers' => $headers,
         ]);
 
-        
-        
+
+
         if (is_wp_error($response)) {
             return 'Erro: ' . $response->get_error_message();
         }
-        
-        $logger = wc_get_logger();
-        $context = array('source' => 'Subscribe----');
-        $logger->info("One to beam on board -:  $response", $context);
-          
+
+
+        $this->logAPI("One to beam up.");
+
         return wp_remote_retrieve_body($response);
-
     }
-    
 
-    
-  
 
+    private function logAPI($content)
+    {
+        $context = array('source' => 'LibreSignAPI----');
+        $logger = wc_get_logger();
+        $logger->info($content, $context);
+    }
 }
-
-
-
-

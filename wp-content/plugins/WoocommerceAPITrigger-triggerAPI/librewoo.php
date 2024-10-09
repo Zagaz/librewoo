@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin Name: Woo Order Complete Message
  * Description: Prints "Woo Completed" message when an order is completed and restricts cart to one product.
@@ -24,21 +25,8 @@ new WooOrderComplete();
 
 add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to_handle_cancellation', 10, 1);
 
-function your_custom_function_to_handle_cancellation($subscription) {
-
-    // Trigger API
-    $unsubscribe = new LibreSignEndpoint(
-        'groupid',
-        'display_name',
-        'quota',
-        'apps',
-        'authorization'
-    );
-    $unsubscribe->triggerAPI('unscription');
-    
+function your_custom_function_to_handle_cancellation($subscription)
+{
+    $unsubscribe = new LibreSignEndpoint();
+    $unsubscribe->unsubscribe_libreSign();
 }
-
-
-
-
-
