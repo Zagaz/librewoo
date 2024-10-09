@@ -92,10 +92,7 @@ class WooOrderComplete
         $quota = $order_data["purchased_items"][0]["name"];
         $apps = $authorization = "Placeholder";
         // Trigger LibreSign API
-        $apiCall = new LibreSignEndpoint($email, $display_name, $quota, $apps, $authorization);
-        $apiCall->triggerAPI(
-            "subscribe"
-        );
+    
         //Log
         $logger = wc_get_logger();
         $context_librewoo_order_confirmed = array('source' => 'librewoo-order-confirmed');

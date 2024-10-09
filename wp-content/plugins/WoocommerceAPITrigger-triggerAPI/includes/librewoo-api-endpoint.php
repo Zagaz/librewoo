@@ -19,9 +19,11 @@ class LibreSignEndpoint
 
     public function unsubscribe_libreSign($subscription)
     {
+        $id = ($subscription);
 
         $this->logAPI("He's dead, Jim.");
-        $this->logAPI($subscription);
+        $this->logAPI($id);
+
     }
 
     public function subscribe_libreSign()
