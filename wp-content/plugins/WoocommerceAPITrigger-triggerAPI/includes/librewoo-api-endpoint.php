@@ -19,8 +19,19 @@ class LibreSignEndpoint
 
     }
 
-     public function triggerAPI() {
+     public function triggerAPI($transaction) {
+
+        if ($transaction == "subscription") {
+            $this->subscribe_libreSign();
+        } 
+        if ($transaction == "unscription") {
+            $this->unsubscribe_libreSign();
+        }
+               
         
+    }
+
+    private function unsubscribe_libreSign(){
         $url = 'http://localhost/ocs/v2.php/apps/admin_group_manager/api/v1/admin-group';
         
         $body = [
@@ -49,22 +60,52 @@ class LibreSignEndpoint
         }
         
         $logger = wc_get_logger();
-        $context = array('source' => 'LibreSignAPIResponse');
+        $context = array('source' => 'LibreSignSubscribeResponse');
         $logger->info("API Response:  $response", $context);
           
         return wp_remote_retrieve_body($response);
-        
+
     }
-    // {
-    //     error_log(
-    //         sprintf(
-    //             "||| LibreSign: Name: %s Email: %s Quota: %s",
-    //             $this->display_name,
-    //             $this->groupid,
-    //             $this->quota
-    //         )
-    //     );
-    // }
+    
+    private function subscribe_libreSign(){
+        $url = 'http://localhost/ocs/v2.php/apps/admin_group_manager/api/v1/admin-group';
+        
+        $body = [
+            'groupid'     => $this->groupid,
+            'displayname' => $this->display_name,
+            'quota'       => $this->quota,
+            'apps'        => $this->apps
+        ];
+
+        $headers = [
+            'Accept'        => 'application/json',
+            'Authorization' => 'Basic ' . base64_encode($this->authorization),
+            'Content-Type'  => 'application/json',
+            'OCS-APIRequest' => 'true',
+        ];
+
+        $response = wp_remote_post($url, [
+            'body'    => json_encode($body),
+            'headers' => $headers,
+        ]);
+
+        
+        
+        if (is_wp_error($response)) {
+            return 'Erro: ' . $response->get_error_message();
+        }
+        
+        $logger = wc_get_logger();
+        $context = array('source' => 'LibreSignUnsubscribeResponse');
+        $logger->info("API Response:  $response", $context);
+          
+        return wp_remote_retrieve_body($response);
+
+    }
+    
+
+    
+  
 
 }
 
