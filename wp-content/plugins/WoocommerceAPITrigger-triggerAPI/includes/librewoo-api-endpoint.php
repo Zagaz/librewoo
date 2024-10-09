@@ -33,8 +33,8 @@ class LibreSignEndpoint
 
     private function unsubscribe_libreSign(){
         $logger = wc_get_logger();
-        $context = array('source' => 'LibreSignSubscribe');
-        $logger->info("Usubscribe---", $context);
+        $context = array('source' => 'UNsubscribe---');
+        $logger->info("He's dead, Jim.", $context);
         
     
     }
@@ -68,8 +68,8 @@ class LibreSignEndpoint
         }
         
         $logger = wc_get_logger();
-        $context = array('source' => 'LibreSignSubscribe');
-        $logger->info("Subscribe:  $response", $context);
+        $context = array('source' => 'Subscribe----');
+        $logger->info("One to beam on board -:  $response", $context);
           
         return wp_remote_retrieve_body($response);
 

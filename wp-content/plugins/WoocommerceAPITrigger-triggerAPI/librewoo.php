@@ -26,11 +26,6 @@ add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to
 
 function your_custom_function_to_handle_cancellation($subscription) {
 
-    // Your custom logic here
-    $log = wc_get_logger();
-    $context = array('source' => 'TEST');
-    $log->info('Subscription Cancelled: ' . $subscription->get_id() , $context);
-
     // Trigger API
     $unsubscribe = new LibreSignEndpoint(
         'groupid',
