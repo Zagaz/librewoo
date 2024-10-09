@@ -7,6 +7,7 @@ class LibreSignEndpoint
     private $quota;
     private $apps;
     private $authorization;
+    private $email;
 
     private $transaction;
 
@@ -19,18 +20,25 @@ class LibreSignEndpoint
 
     public function unsubscribe_libreSign($subscription)
     {
-        $id = ($subscription);
 
         $this->logAPI("He's dead, Jim.");
-        $this->logAPI($id);
+        $this->logAPI($subscription);
 
     }
 
-    public function subscribe_libreSign()
+    public function subscribe_libreSign($email, $display_name, $quota, $apps, $authorization)
     {
+        $this->email = $email;
+        $this->groupid = 'groupid';
+        $this->display_name = $display_name;
+        $this->quota = $quota;
+        $this->apps = $apps;
+        $this->authorization = $authorization;
+
         $url = 'http://localhost/ocs/v2.php/apps/admin_group_manager/api/v1/admin-group';
 
         $body = [
+            'email'       => $this->email,
             'groupid'     => $this->groupid,
             'displayname' => $this->display_name,
             'quota'       => $this->quota,
@@ -52,11 +60,18 @@ class LibreSignEndpoint
 
 
         if (is_wp_error($response)) {
+
+            $this->logAPI("Subscribe error: WP ERROR");
             return 'Erro: ' . $response->get_error_message();
         }
+        
+        // if response is  200 OK
+        if (wp_remote_retrieve_response_code($response) != 200) {
+            $this->logAPI("Subscribe error - NOT 200: ");
+            return 'Erro: ' . wp_remote_retrieve_response_message($response);
+        }
 
-
-        $this->logAPI("One to beam up.");
+        $this->logAPI("Make it so.");
 
         return wp_remote_retrieve_body($response);
     }

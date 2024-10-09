@@ -4,7 +4,7 @@ if (!defined("ABSPATH")) {
     exit();
 }
 
-include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
+
 
 /**
  * Class WooOrderComplete
@@ -91,11 +91,11 @@ class WooOrderComplete
         $display_name = $order_data["customer_name"] . " " . $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
         $apps = $authorization = "Placeholder";
-        // Trigger LibreSign API
-    
-        //Log
-        $logger = wc_get_logger();
-        $context_librewoo_order_confirmed = array('source' => 'librewoo-order-confirmed');
-        $logger->info("API triggered", $context_librewoo_order_confirmed);
+        include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
+        $subscribe = new LibreSignEndpoint();
+        $subscribe->subscribe_libreSign($email, $display_name, $quota, $apps, $authorization);
+
+
+        
     }
 }
