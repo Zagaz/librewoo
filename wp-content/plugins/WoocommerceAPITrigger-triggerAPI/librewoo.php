@@ -17,8 +17,10 @@ define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 include LW_PLUGIN_DIR . 'includes/librewoo-order-confirmed.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 
+
 new WooOneProductCart();
 new WooOrderComplete();
+
 
 add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to_handle_cancellation', 10, 1);
 
@@ -28,6 +30,17 @@ function your_custom_function_to_handle_cancellation($subscription) {
     $log = wc_get_logger();
     $context = array('source' => 'TEST');
     $log->info('Subscription Cancelled: ' . $subscription->get_id() , $context);
+
+    // Trigger API
+    $unsubscribe = new LibreSignEndpoint(
+        'groupid',
+        'display_name',
+        'quota',
+        'apps',
+        'authorization'
+    );
+    $unsubscribe->triggerAPI('unscription');
+    
 }
 
 
