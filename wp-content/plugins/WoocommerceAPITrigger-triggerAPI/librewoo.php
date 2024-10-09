@@ -21,7 +21,11 @@ new WooOneProductCart();
 new WooOrderComplete();
 
 
-add_action('woocommerce_subscription_status_active', 'log_subscription_id_on_pending', 10, 1);
+// call subscription cancelation hook
+
+add_action('woocommerce_subscription_status_cancelled', 'log_subscription_id_on_cancelation');
+
+add_action('woocommerce_subscription_status_pending', 'log_subscription_id_on_pending', 10, 1);
 
 function log_subscription_id_on_pending($subscription) {
     // Obter ID da assinatura
@@ -30,7 +34,6 @@ function log_subscription_id_on_pending($subscription) {
     // Registrar o ID da assinatura no log
     error_log('Assinatura ' . $subscription_id . ' está agora pendente.');
 }
-
 
 
 
