@@ -6,6 +6,7 @@ if (!defined("ABSPATH")) {
 
 
 
+
 /**
  * Class WooOrderComplete
  *
@@ -91,7 +92,7 @@ class WooOrderComplete
         $display_name = $order_data["customer_name"] . " " . $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
         $apps = $authorization = "Placeholder";
-        include LW_PLUGIN_DIR . "includes/librewoo-api-endpoint.php";
+  
         $subscribe = new LibreSignEndpoint();
         $subscribe->subscribe_libreSign($email, $display_name, $quota, $apps, $authorization);
 
