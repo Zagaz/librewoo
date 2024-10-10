@@ -17,12 +17,16 @@ define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
 include LW_PLUGIN_DIR . 'includes/librewoo-subscribe.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-unsubscribe.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-on-hold.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-api-endpoint.php';
 
 
 new WooOneProductCart();
+new LibreSignEndpoint();
+
 new LibreSignSubscribe();
 new LibreSignUnsubscribe();
+new LibreSignOnHold();
 
 

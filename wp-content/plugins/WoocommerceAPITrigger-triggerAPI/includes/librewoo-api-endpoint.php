@@ -74,9 +74,11 @@ class LibreSignEndpoint
         return wp_remote_retrieve_body($response);
     }
 
-    public function hold_libresign()
+    public function hold_libresign($subscription)
     {
+        $subscription_id = $subscription->get_id();
         $this->logAPI("Hold still! This won't hurt a bit.");
+        $this->logAPI("Subscription on hold ID:" . $subscription_id);
 
     }
 
