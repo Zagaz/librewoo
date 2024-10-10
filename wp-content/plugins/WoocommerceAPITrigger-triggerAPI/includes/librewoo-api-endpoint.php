@@ -9,7 +9,6 @@ class LibreSignEndpoint
     private $authorization;
     private $email;
 
-    private $transaction;
 
 
 
