@@ -24,10 +24,12 @@ new WooOneProductCart();
 new WooOrderComplete();
 
 
-add_action('woocommerce_subscription_status_cancelled', 'your_custom_function_to_handle_cancellation', 10, 1);
+add_action('woocommerce_subscription_status_cancelled', 'librewoo_unsubscribe', 10, 1);
 
-function your_custom_function_to_handle_cancellation($subscription)
+function librewoo_unsubscribe($subscription)
 {
+    
+   
     $unsubscribe = new LibreSignEndpoint();
     $unsubscribe->unsubscribe_libreSign($subscription);
 }

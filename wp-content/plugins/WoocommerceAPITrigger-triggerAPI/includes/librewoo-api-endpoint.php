@@ -9,32 +9,19 @@ class LibreSignEndpoint
     private $authorization;
     private $email;
 
-
-
-
-    public function __construct()
-    {
-    
-    }
+    public function __construct() {}
 
     public function unsubscribe_libreSign($subscription)
     {
-        // get the id of $subscription
+
+        if (!$subscription instanceof WC_Subscription) {
+            error_log("Subscription is not valid");
+            return;
+        }
+
         $subscription_id = $subscription->get_id();
-        
         $this->logAPI("He's dead, Jim.");
-     
-
-   
-
- $this->   logAPI("Subscription ID:" . $subscription_id);
-
- 
-
-          
-        
-
-
+        $this->logAPI("Subscription cancelled ID:" . $subscription_id);
     }
 
     public function subscribe_libreSign($email, $display_name, $quota, $apps, $authorization)
@@ -75,7 +62,7 @@ class LibreSignEndpoint
             $this->logAPI("Subscribe error: WP ERROR");
             return 'Erro: ' . $response->get_error_message();
         }
-        
+
         // if response is  200 OK
         if (wp_remote_retrieve_response_code($response) != 200) {
             $this->logAPI("Subscribe error - NOT 200: ");
