@@ -23,7 +23,7 @@ class LibreSignUnsubscribe
     public function __construct()
     {
 
-        add_action('woocommerce_subscription_status_cancelled', 'librewoo_unsubscribe', 10, 1);
+        add_action('woocommerce_subscription_status_cancelled', [$this,'librewoo_unsubscribe'], 10, 1);
         
     }
 
