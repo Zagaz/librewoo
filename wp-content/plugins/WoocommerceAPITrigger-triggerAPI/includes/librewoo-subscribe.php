@@ -8,13 +8,13 @@ if (!defined("ABSPATH")) {
 
 
 /**
- * Class WooOrderComplete
+ * Class LibreSignSubscribe
  *
  * Triggers LibreSign API when an order is completed
  *
  * @since 1.0.0
  */
-class WooOrderComplete
+class LibreSignSubscribe
 {
     private $order_id;
 

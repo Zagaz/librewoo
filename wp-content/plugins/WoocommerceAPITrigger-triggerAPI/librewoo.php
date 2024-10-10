@@ -15,21 +15,14 @@ if (!defined('ABSPATH')) {
 
 define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-include LW_PLUGIN_DIR . 'includes/librewoo-order-confirmed.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-subscribe.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-unsubscribe.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-api-endpoint.php';
 
 
 new WooOneProductCart();
-new WooOrderComplete();
+new LibreSignSubscribe();
+new LibreSignUnsubscribe();
 
 
-add_action('woocommerce_subscription_status_cancelled', 'librewoo_unsubscribe', 10, 1);
-
-function librewoo_unsubscribe($subscription)
-{
-    
-   
-    $unsubscribe = new LibreSignEndpoint();
-    $unsubscribe->unsubscribe_libreSign($subscription);
-}

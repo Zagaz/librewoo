@@ -74,6 +74,12 @@ class LibreSignEndpoint
         return wp_remote_retrieve_body($response);
     }
 
+    public function hold_libresign()
+    {
+        $this->logAPI("Hold still! This won't hurt a bit.");
+
+    }
+
 
     private function logAPI($content)
     {
