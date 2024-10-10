@@ -22,6 +22,7 @@ include LW_PLUGIN_DIR . 'includes/librewoo-payment-failed.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-expiration.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-api-endpoint.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-block-purchase-subscription.php';
 
 
 new WooOneProductCart();
@@ -32,6 +33,7 @@ new LibreSignUnsubscribe();
 new LibreSignOnHold();
 new LibreSignExpiration();
 new LibreSignPaymentFailed();
+new LibreSignBlockPurchaseSameSubscription();
 
 
 
