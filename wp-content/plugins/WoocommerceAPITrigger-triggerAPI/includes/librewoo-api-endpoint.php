@@ -11,9 +11,17 @@ class LibreSignEndpoint
 
     public function __construct() {}
 
+    /**
+     * Unsubscribe user from LibreSign.
+     * Important: Once unsubscribed, the user loses access to the service permanently.
+     *
+     * @param WC_Subscription $subscription
+     * @return void
+     * @since 1.0.0
+     */
     public function unsubscribe_libreSign($subscription)
     {
-
+        // IMPORTANT: Once unsubscribed, the user loses access to the service permanently.
         if (!$subscription instanceof WC_Subscription) {
             error_log("Subscription is not valid");
             return;
@@ -24,6 +32,17 @@ class LibreSignEndpoint
         $this->logAPI("Subscription cancelled ID:" . $subscription_id);
     }
 
+    /**
+     * The client purchases a subscription to the service.
+     * it will trigger the LibreSign API to create a new user.
+     * 
+     * @param mixed $email
+     * @param mixed $display_name
+     * @param mixed $quota
+     * @param mixed $apps
+     * @param mixed $authorization
+     * @return string
+     */
     public function subscribe_libreSign($email, $display_name, $quota, $apps, $authorization)
     {
         $this->email = $email;
@@ -74,6 +93,15 @@ class LibreSignEndpoint
         return wp_remote_retrieve_body($response);
     }
 
+    /**
+     * Hold subscription
+     * IMPORTANT: Tipically occurs when the user has not paid the subscription fee
+     * but there is still a chance to recover the user.
+     * 
+     * 
+     * @param mixed $subscription
+     * @return void
+     */
     public function hold_libresign($subscription)
     {
         $subscription_id = $subscription->get_id();
@@ -81,8 +109,38 @@ class LibreSignEndpoint
         $this->logAPI("Subscription on hold ID:" . $subscription_id);
 
     }
+    /**
+     * Payment failed
+     * IMPORTANT: It automatically set the subscription status to "on-hold".
+     * @param mixed $subscription
+     * @return void
+     */
+    public function payment_failed_libreSign($subscription)
+    {
+        $subscription_id = $subscription->get_id();
+        $this->logAPI("Payment failed ID:" . $subscription_id);
+    }
 
+    /**
+     * Subscription expired
+     * IMPORTANT: Once expired, the subscription is cancelled and the user loses access to the service permanently.
+     * @param mixed $subscription
+     * @return void
+     */
+    public function expiration_libreSign($subscription)
+    {
+        // IMPORTANT: Once expired, the subscription is cancelled and the user loses access to the service permanently.
+        $subscription_id = $subscription->get_id();
+        $this->logAPI("Subscription expired ID:" . $subscription_id);
+    }
+  
 
+    /**
+     * Log API
+     * It logs the API request. 
+     * @param mixed $content
+     * @return void
+     */
     private function logAPI($content)
     {
         $context = array('source' => 'LibreSignAPI----');
