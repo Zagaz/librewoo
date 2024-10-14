@@ -99,10 +99,14 @@ class LibreSignBlockPurchaseSameSubscription
                 wc_add_notice($product_id_cart . " You already have this subscription", 'error');
     
                 $error_printed = true; // Set the flag to true after printing the error
-                // remove message "has been added to your cart"
-                add_filter('wc_add_to_cart_message_html', '__return_false');
+                   // Temporarily remove the add-to-cart message
+                   add_filter('wc_add_to_cart_message_html', function($message, $products) {
+                    return ''; // Return an empty string to remove the message
+                }, 10, 2);
 
-
+                // remove this product from the cart
+                WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
+                
               }
               break 2; // Exit both loops
             }
