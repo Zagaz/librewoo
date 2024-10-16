@@ -82,7 +82,8 @@ class LibreSignCheckSubscription
                 if (isset($data['product_id'])) {
                     if ($data['product_id'] == $product_id_cart) {
                         $this->set_is_subscription(true);
-                        // Verificar se a assinatura está ativa
+                     
+              
                         $subscription = wcs_get_subscription($item->get_order_id());
                         if ($subscription && $subscription->has_status('active')) {
                             $this->set_is_active(true);
@@ -93,8 +94,7 @@ class LibreSignCheckSubscription
                 }
             }
         }
-        $this->set_is_active(false);
-        $this->set_is_subscription(true);
+  
 
         // Verificar se a assinatura está ativa
         if ($this->get_is_subscription() && $this->get_is_active()) {
@@ -105,7 +105,8 @@ class LibreSignCheckSubscription
         // $this->set_check(true);
      
         // return $check
-        return $this->get_check();
+        return $this->get_is_subscription();
+        // return $this->get_is_active();
     }
 }
 

@@ -39,7 +39,7 @@ class LibreSignBlockPurchaseSameSubscription
     echo "<pre>";
 
     var_dump($has_subscription->check_subscription());
-    $test = $has_subscription->check_subscription();
+    $test = $has_subscription->check_subscription() !== null;
     echo "</pre>";
 
     if ($test) {
