@@ -12,18 +12,18 @@ if (!defined("ABSPATH")) {
  */
 class LibreSignCheckSubscription
 {
-  public $returnData ;
+  public $has_subscription ;
 
 
   public function __construct()
   {
-    $this->set_returnData(false);
+    $this->set_has_subscription(false);
   }
 
         
-  function set_returnData($data)
+  function set_has_subscription($data)
   {
-    $this->returnData = $data;
+    $this->has_subscription = $data;
   }
    
   /**
@@ -72,7 +72,7 @@ class LibreSignCheckSubscription
             if (isset($data['product_id'])) {
               if ($data['product_id'] == $product_id_cart) {
           
-                $this->set_returnData(true);
+                $this->set_has_subscription(true);
 
                                   
                   
@@ -82,7 +82,7 @@ class LibreSignCheckSubscription
             }
           }
 
-          return $this->returnData;
+          return $this->has_subscription;
         }
       }
     }
