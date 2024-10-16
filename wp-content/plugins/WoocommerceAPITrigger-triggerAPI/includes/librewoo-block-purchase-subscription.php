@@ -38,6 +38,7 @@ class LibreSignBlockPurchaseSameSubscription
     $test->check_subscription();
     // convert $test to string
     $test = json_encode($test, JSON_PRETTY_PRINT);
+    // WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
  
 
     

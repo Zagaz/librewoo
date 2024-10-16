@@ -1,5 +1,11 @@
 <?php 
 
+//You shall not pass
+if (!defined("ABSPATH")) {
+  exit();
+}
+
+
 /**
  * It checks if the user has already purchased the same subscription product
  * and if it's active. If so, returns true.
@@ -56,7 +62,7 @@ class LibreSignCheckSubscription
           $product_id_cart = $cart_item['product_id'];
           break;
         }
-        $error_printed = false; // Flag to control error printing
+    
 
         // loop the $item_list, if  $product_id_cart ==
 
@@ -66,34 +72,21 @@ class LibreSignCheckSubscription
             if (isset($data['product_id'])) {
               if ($data['product_id'] == $product_id_cart) {
           
-                if (!$error_printed) {
-                  wc_add_notice($product_id_cart . " You already have this subscription", 'error');
-      
-                  $error_printed = true; // Set the flag to true after printing the error
-                  $this->set_returnData(true);
-                     // Temporarily remove the add-to-cart message
-                     add_filter('wc_add_to_cart_message_html', function($message, $products) {
-                      return ''; // Return an empty string to remove the message
-                  }, 10, 2);
-  
-                  // remove this product from the cart
-                  WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
+                $this->set_returnData(true);
+
+                                  
                   
                 }
                 break 2; // Exit both loops
               }
             }
           }
+
+          return $this->returnData;
         }
-
-
       }
-      
-
-      
-      return $this->returnData;
-  
-  
     }
+  
 
-}
+                
+     
