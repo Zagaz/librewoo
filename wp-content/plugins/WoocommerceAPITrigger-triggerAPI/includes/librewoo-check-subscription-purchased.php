@@ -63,7 +63,7 @@ class LibreSignCheckSubscriptionPurchased
             if (isset($data['product_id'])) {
               if ($data['product_id'] == $product_id_cart) {
                 if (!$error_printed) {
-                  wc_add_notice($product_id_cart . " You already have this subscription", 'error');
+                 
       
                   $error_printed = true; // Set the flag to true after printing the error
                      // Temporarily remove the add-to-cart message
@@ -72,11 +72,16 @@ class LibreSignCheckSubscriptionPurchased
                   }, 10, 2);
   
                   // remove this product from the cart
-                  WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
+                  
                   
                 }
                 break 2; // Exit both loops
+
               }
+              
+              return $product_id_cart;
+
+
             }
           }
         }

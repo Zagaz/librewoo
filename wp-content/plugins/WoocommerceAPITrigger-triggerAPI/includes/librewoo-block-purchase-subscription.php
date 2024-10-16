@@ -37,6 +37,24 @@ class LibreSignBlockPurchaseSameSubscription
     $check_subscription = new LibreSignCheckSubscriptionPurchased();
     $check_subscription->check_purchase_same_subscription();
 
+    // chech type of $check_subscription
+
+    $type = gettype($check_subscription);
+
+    if (is_user_logged_in() && $check_subscription ){
+      wc_add_notice( "You already have this subscription |" . $type, 'error');
+      WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
+    }
+
+    
+
+    // validate $check_subscription. This must be an integer. If true and NOT 0, then the user already has this subscription
+
+    
+
+
+    //      wc_add_notice($product_id_cart . " You already have this subscription", 'error');
+
   }
 
 
