@@ -35,9 +35,11 @@ class LibreSignBlockPurchaseSameSubscription
 
   function block_purchase_same_subscription(){
     $has_subscription = new LibreSignCheckSubscription();
-    $has_subscription->check_subscription();
+    $dump = $has_subscription->check_subscription();
+
+    var_dump($dump);
   
-    if($has_subscription->has_subscription){
+    if($dump){
       
       $warning = "You already have this subscription";
 
