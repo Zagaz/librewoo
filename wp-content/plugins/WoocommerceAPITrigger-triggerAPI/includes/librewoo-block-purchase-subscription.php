@@ -39,7 +39,7 @@ class LibreSignBlockPurchaseSameSubscription
   
     if($has_subscription->has_subscription){
       
-      $warning = "You already have this subscription|";
+      $warning = "You already have this subscription";
 
       WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
       // woocommerce error message
