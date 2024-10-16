@@ -33,9 +33,25 @@ class LibreSignBlockPurchaseSameSubscription
     );
   }
 
+  function block_purchase_same_subscription(){
+    $test = new LibreSignCheckSubscription();
+    $test->check_subscription();
+    // convert $test to string
+    $test = json_encode($test, JSON_PRETTY_PRINT);
+ 
+
+    
+    // woocommerce error message
+    wc_add_notice((string) $test, 'error');
+    
+
+  }
 
 
-  function block_purchase_same_subscription()
+
+
+
+  function block_purchase_same_subscriptionOLD()
   {
 
     if (is_user_logged_in()) {
