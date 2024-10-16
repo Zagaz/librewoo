@@ -31,17 +31,19 @@ class LibreSignBlockPurchaseSameSubscription
       10,
       6
     );
+    
   }
 
   function block_purchase_same_subscription(){
     $has_subscription = new LibreSignCheckSubscription();
-    $dump = $has_subscription->check_subscription();
+    echo "<pre>";
 
-    var_dump($dump);
-  
-    if($dump){
-      
-      $warning = "You already have this subscription";
+    var_dump($has_subscription->check_subscription());
+    $test = $has_subscription->check_subscription();
+    echo "</pre>";
+
+    if ($test) {
+      $warning = "You already have this subscri|tion";
 
       WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
       // woocommerce error message
@@ -51,6 +53,22 @@ class LibreSignBlockPurchaseSameSubscription
         return ''; // Return an empty string to remove the message
     }, 10, 2);
     }
+   
+
+  
+  
+    // if( $has_subscription ){
+      
+    //   $warning = "You already have this subscription";
+
+    //   WC()->cart->remove_cart_item(key(WC()->cart->get_cart()));
+    //   // woocommerce error message
+    //   wc_add_notice((string) $warning, 'error');
+    //   // Temporarily remove the add-to-cart message
+    //   add_filter('wc_add_to_cart_message_html', function($message, $products) {
+    //     return ''; // Return an empty string to remove the message
+    // }, 10, 2);
+    // }
 
 
     
