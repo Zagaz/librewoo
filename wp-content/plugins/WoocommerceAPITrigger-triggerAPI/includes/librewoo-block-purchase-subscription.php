@@ -235,31 +235,31 @@ class LibreSignBlockPurchaseSameSubscription
       for ($i = 0; $i < count($items_list); $i++) {
         foreach ($items_list[$i] as $item) {
           $data = $item->get_data();
+          $id = $item->get_id();
+          $order_id = $item->get_order_id();
+          echo '<pre>';
+          print_r($id);
+          echo "<br>";
+          print_r($order_id);
+          echo "<br>";
+
+          echo '</pre>';
+          var_dump($data);
 
           if (isset($data['product_id']) && $data['product_id'] == $product_id_cart) {
             ///=================================================
 
 
             // Verificar se a assinatura está ativa
-            $order_id = 288;
-            $subscription_id = get_post_meta( $order_id, '_pronamic_subscription_id', true );
+            // $order_id = $order_id;
+            $subscription_id = wcs_get_subscriptions_for_order($order_id);
 
             if ( $subscription_id ) {
-              // Example: Get subscription start date
-              $start_date = get_post_meta( $subscription_id, '_pronamic_subscription_start_date', true );
-          
-              // Example: Get subscription expiration date
-              $expiry_date = get_post_meta( $subscription_id, '_pronamic_subscription_expiry_date', true );
-          
-              // Example: Get the subscription status
-              $status = get_post_meta( $subscription_id, '_pronamic_subscription_status', true );
-          
-              echo "Subscription ID: $subscription_id\n";
-              echo "Start Date: $start_date\n";
-              echo "Expiry Date: $expiry_date\n";
-              echo "Status: $status\n";
+              echo "<pre>";
+              var_dump($subscription_id);
+
           } else {
-              echo "No subscription found for this order. $order_id\n";
+              echo "No subscription found for this order. $subscription_id";
           }
             
 
