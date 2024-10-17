@@ -35,7 +35,7 @@ class LibreSignBlockPurchaseSameSubscription
    */
   public function block_purchase_same_subscription()
   {
-  
+
     if (is_user_logged_in()) {
 
       $user_id      = get_current_user_id();
@@ -62,21 +62,24 @@ class LibreSignBlockPurchaseSameSubscription
         );
       }
 
-     // get the cart items
+      // get the cart items
       $cart_items = WC()->cart->get_cart();
-      
+
       $cart_product_id = (reset($cart_items)['product_id']);
-      for($i = 0; $i < count($subscription_data); $i++) {
-        if($cart_product_id == $subscription_data[$i]['product_id'] && $subscription_data[$i]['status'] == 'active') {
+      for ($i = 0; $i < count($subscription_data); $i++) {
+        if (
+          $cart_product_id == $subscription_data[$i]['product_id']
+          && $subscription_data[$i]['status'] == 'active'
+        ) {
           $is_active_subscription = true;
           break;
         }
       }
 
       if ($is_active_subscription) {
-        wc_add_notice( 'You already subscribed this product and it\'s active', 'error');
+        wc_add_notice('You already subscribed this product and it\'s active', 'error');
         add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
-      }   
+      }
     }
   }
 }
