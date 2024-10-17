@@ -88,11 +88,14 @@ class LibreSignBlockPurchaseSameSubscription
             $order_id = $item->get_order_id();
             if (isset($data['product_id']) && $data['product_id'] == $product_id_cart) {
               $subscription = wcs_get_subscriptions_for_order($order_id);
+              $product_id = $data['product_id'] ;
+          
               $is_subriscription = true;
             }
   
               if ($subscription) {
                 $subscription_status = reset($subscription)->get_status();
+                
                 if ($subscription_status == 'active') {
                   $is_active = true;
                   if (!$error_printed) {
@@ -112,8 +115,17 @@ class LibreSignBlockPurchaseSameSubscription
 
         if($is_subriscription && $is_active){
           echo "test";
-          echo $is_subriscription;
-          echo $is_active;
+          echo "<br>";
+          echo 'Is subscription BOOL ' . $is_subriscription;
+          echo "<br>";
+          echo "Is active BOOL " . $is_active;
+          echo "<br>";
+          echo "Product id :" . $product_id;
+          echo "<br>";
+          echo "Subs status :" . $subscription_status;
+
+
+
         
         }
       }
