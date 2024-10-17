@@ -84,7 +84,7 @@ class LibreSignCheckSubscription
                 $data = $item->get_data();
 
                 // print this $data
-                 print_r($data);
+                //  print_r($data);
 
 
               
