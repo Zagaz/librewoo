@@ -29,13 +29,13 @@ class LibreSignSubscruptionStatusChecker
             $items = $order->get_items();
             foreach ($items as $item) {
                 $data = $item->get_data();
-                $subscription_data['user_id'] =  $user_id;
+        
             }
             $subscription_data[] = array(
                 'subscription_id' => $sub->get_id(),
                 'parent_id' => $sub->get_parent_id(),
                 'status'    => $sub->get_status(),
-                'product_id' => $subscription_data['user_id'],
+          
 
             );
         }
