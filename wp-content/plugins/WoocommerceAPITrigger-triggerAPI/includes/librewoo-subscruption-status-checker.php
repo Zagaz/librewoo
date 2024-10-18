@@ -40,8 +40,7 @@ class LibreSignSubscruptionStatusChecker
             );
         }
 
-
-         
+             
        
         
 
@@ -49,7 +48,10 @@ class LibreSignSubscruptionStatusChecker
 
 
 echo "<pre>";
+
 var_dump($subscription_data);
+
+
 
      
 
