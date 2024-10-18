@@ -46,14 +46,11 @@ class LibreSignBlockPurchaseSameSubscription
     $user_id = get_current_user_id();
     // get the cart items
     $cart_items = WC()->cart->get_cart();
-    // get the product id of all items in the cart
-    $cart_product_id = (reset($cart_items)['product_id']);
-
+    
 
     $is_subscription_active = new LibreSignSubscruptionStatusChecker();
-    $is_subscription_active->check_subscription_status($user_id , $cart_product_id);
-    echo strval($is_subscription_active->check_subscription_status($user_id , $cart_product_id));
-    
+    $is_subscription_active->check_subscription_status($user_id , 1);
+    echo strval($is_subscription_active->test());
     exit();
 
 
