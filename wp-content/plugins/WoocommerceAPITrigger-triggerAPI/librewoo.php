@@ -27,7 +27,7 @@ include LW_PLUGIN_DIR . 'includes/librewoo-check-subscription.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-subscruption-status-checker.php';
 
 
-new WooOneProductCart();
+new LibreSignAddToCartValidation();
 new LibreSignEndpoint();
 new LibreSignSubscribe();
 new LibreSignUnsubscribe();

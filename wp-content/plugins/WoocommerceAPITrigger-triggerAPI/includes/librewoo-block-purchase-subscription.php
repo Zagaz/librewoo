@@ -49,7 +49,15 @@ class LibreSignBlockPurchaseSameSubscriptionAndActive
         for ( $i = 0; $i < count( $check_subs ); $i++ ) {
             if ( $cart_product_id == $check_subs[ $i ]['product_id'] && $check_subs[ $i ]['status'] == 'active' ) {
                 wc_add_notice( 
-                    'You already subscribed to this product and it\'s ' . $check_subs[ $i ]['status'] . '.', 
+                    'You can\'t subscribe to this product because you already have it and it\'s <strong> 
+                    <span style="color: green; text-transform: Capitalize;">
+                    ' . $check_subs[ $i ]['status'] . '. 
+                    </span>
+                    </strong> Please consider an 
+                    <strong><a href="#">
+                    upgrade</a> </strong> 
+                    or 
+                    <strong><a href="#">contact support</a></strong> if you have any questions.', 
                     'error' 
                 );
                 add_filter( 'wc_add_to_cart_message_html', '__return_empty_string', 10, 2 );

@@ -12,7 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     *
     */
     
-class WooOneProductCart {
+class LibreSignAddToCartValidation
+{
     
     public function __construct() {
         // Hook into WooCommerce add to cart validation
