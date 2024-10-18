@@ -18,6 +18,7 @@ class LibreSignSubscruptionStatusChecker
 
     public function check_subscription_status($user_id, $cart_product_id)
     {
+        var_dump(json_encode($cart_product_id));
         $subscriptions = wcs_get_users_subscriptions($user_id);
         $subscription_data = array();
 
@@ -42,7 +43,8 @@ class LibreSignSubscruptionStatusChecker
 
 
 
-        var_dump($subscription_data);
+        var_dump(json_encode($subscription_data));
+  
 
         return $subscription_data;
 
