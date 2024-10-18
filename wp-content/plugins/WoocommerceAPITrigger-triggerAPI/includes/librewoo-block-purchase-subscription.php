@@ -73,7 +73,7 @@ class LibreSignBlockPurchaseSameSubscriptionAndStatus
 
         $log = new LibreSignLogger();
         $log -> librewoo_log(
-          'Client #'. $user_id .' tried to purchase a subscription for product #'. $cart_product_id .', but already has an '. $this_status .' subscription for the same product.', 
+          'Client #'. $user_id .' can not subscribe product #'. $cart_product_id .', already has '. $this_status .' subscription.', 
           'info');
 
       }
