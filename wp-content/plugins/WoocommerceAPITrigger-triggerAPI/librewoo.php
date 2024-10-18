@@ -27,6 +27,7 @@ $includes = [
     'librewoo-block-purchase-subscription.php',
     'librewoo-check-subscription.php',
     'librewoo-subscruption-status-checker.php',
+    'librewoo-logger.php',
 ];
 
 foreach ($includes as $file) {
@@ -43,8 +44,9 @@ $classes = [
     'LibreSignOnHold',
     'LibreSignExpiration',
     'LibreSignPaymentFailed',
-    'LibreSignBlockPurchaseSameSubscription', // Assuming this class exists
-    'LibreSignCheckSubscription', // Assuming this class exists
+    'LibreSignBlockPurchaseSameSubscription', 
+    'LibreSignCheckSubscription', 
+    'LibreSignLogger'
 ];
 
 

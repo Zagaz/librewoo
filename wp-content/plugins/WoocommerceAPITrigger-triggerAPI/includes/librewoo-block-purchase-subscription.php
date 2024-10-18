@@ -4,6 +4,8 @@ if (! defined('ABSPATH')) {
   exit;
 }
 
+include LW_PLUGIN_DIR . 'includes/librewoo-logger.php';
+
 /**
  * Class LibreSignBlockPurchaseSameSubscription
  *
@@ -68,6 +70,11 @@ class LibreSignBlockPurchaseSameSubscriptionAndStatus
         $this->remove_cart_item_now($cart_items);
         $this->add_wc_add_notice($message, 'notice');
         $this-> delete_default_notice();
+
+        $log = new LibreSignLogger();
+        $log -> librewoo_log(
+          'Client #'. $user_id .' tried to purchase a subscription for product #'. $cart_product_id .', but already has an '. $this_status .' subscription for the same product.', 
+          'info');
 
       }
     }
