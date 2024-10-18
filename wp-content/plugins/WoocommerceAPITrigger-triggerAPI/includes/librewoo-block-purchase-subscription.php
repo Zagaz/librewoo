@@ -13,12 +13,15 @@ if (! defined('ABSPATH')) {
  *
  * @since 1.0.0
  */
+
 class LibreSignBlockPurchaseSameSubscription
 {
 
   /**
    * Constructor
    */
+  
+
   public function __construct()
   {
     // Add action when the user clicks on the add to cart button
@@ -35,57 +38,66 @@ class LibreSignBlockPurchaseSameSubscription
    */
   public function block_purchase_same_subscription()
   {
-    if (!is_user_logged_in()){
+    if (!is_user_logged_in()) {
       return;
-
     }
 
-$user_id      = get_current_user_id();
+    //get user id
+    $user_id = get_current_user_id();
+    // get the cart items
+    $cart_items = WC()->cart->get_cart();
+    // get the product id of all items in the cart
+    $cart_product_id = (reset($cart_items)['product_id']);
 
 
-$subscriptions = wcs_get_users_subscriptions($user_id);
+    $is_subscription_active = new LibreSignSubscruptionStatusChecker();
+    $is_subscription_active->check_subscription_status($user_id , $cart_product_id);
+    echo strval($is_subscription_active->check_subscription_status($user_id , $cart_product_id));
+    
+    exit();
 
 
-
-// On $subscription, filter out the parent_id and status
-$subscription_data = array();
-      foreach ($subscriptions as $sub) {
-        $order = wc_get_order($sub->get_parent_id());
-        $items = $order->get_items();
-        foreach ($items as $item) {
-          $data = $item->get_data();
-          $subscription_data['product_id'] = $data['product_id'];
-        }
-        
-        $subscription_data[] = array(
-            'subscription_id' => $sub->get_id(),
-          'parent_id' => $sub->get_parent_id(),
-          'status'    => $sub->get_status(),
-          'product_id' => $subscription_data['product_id'],
-        
-        );
-      }
-      
-      // get the cart items
-      $cart_items = WC()->cart->get_cart();
-      
-      // get the product id of all items in the cart
-      $cart_product_id = (reset($cart_items)['product_id']);
-      
-      for ($i = 0; $i < count($subscription_data); $i++) {
-        if ($cart_product_id == $subscription_data[$i]['product_id'] && 
-        $subscription_data[$i]['status'] == 'active') 
-        {
-          $is_active_subscription = true;
-          break;
-        }
-      }
-
-      if ($is_active_subscription) {
-        wc_add_notice('You already subscribed this product and it\'s active', 'error');
-        add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
-        WC()->cart->remove_cart_item(key($cart_items));
-      }
+  
    
+
+  //   $user_id      = get_current_user_id();
+  //   $subscriptions = wcs_get_users_subscriptions($user_id);
+  //   // On $subscription, filter out the parent_id and status
+  //   $subscription_data = array();
+  //   foreach ($subscriptions as $sub) {
+  //     $order = wc_get_order($sub->get_parent_id());
+  //     $items = $order->get_items();
+  //     foreach ($items as $item) {
+  //       $data = $item->get_data();
+  //       $subscription_data['product_id'] = $data['product_id'];
+  //     }
+  //     $subscription_data[] = array(
+  //       'subscription_id' => $sub->get_id(),
+  //       'parent_id' => $sub->get_parent_id(),
+  //       'status'    => $sub->get_status(),
+  //       'product_id' => $subscription_data['product_id'],
+
+  //     );
+  //   }
+  //   // get the cart items
+  //   $cart_items = WC()->cart->get_cart();
+  //   // get the product id of all items in the cart
+  //   $cart_product_id = (reset($cart_items)['product_id']);
+
+  //   for ($i = 0; $i < count($subscription_data); $i++) {
+  //     if (
+  //       $cart_product_id == $subscription_data[$i]['product_id'] &&
+  //       $subscription_data[$i]['status'] == 'active'
+  //     ) {
+  //       $is_active_subscription = true;
+  //       break;
+  //     }
+  //   }
+
+  //   if ($is_active_subscription) {
+  //     wc_add_notice('You already subscribed this product and it\'s active', 'error');
+  //     add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
+  //     WC()->cart->remove_cart_item(key($cart_items));
+  //   }
   }
 }
