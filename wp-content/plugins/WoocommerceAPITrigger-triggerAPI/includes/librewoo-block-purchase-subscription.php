@@ -40,7 +40,6 @@ class LibreSignBlockPurchaseSameSubscription
 
     }
 
-echo '<pre>';
 $user_id      = get_current_user_id();
 
 
@@ -69,16 +68,14 @@ $subscription_data = array();
       
       // get the cart items
       $cart_items = WC()->cart->get_cart();
-      var_dump ($cart_items);
       
-      exit;
-
+      // get the product id of all items in the cart
       $cart_product_id = (reset($cart_items)['product_id']);
+      
       for ($i = 0; $i < count($subscription_data); $i++) {
-        if (
-          $cart_product_id == $subscription_data[$i]['product_id']
-          && $subscription_data[$i]['status'] == 'active'
-        ) {
+        if ($cart_product_id == $subscription_data[$i]['product_id'] && 
+        $subscription_data[$i]['status'] == 'active') 
+        {
           $is_active_subscription = true;
           break;
         }
@@ -87,6 +84,7 @@ $subscription_data = array();
       if ($is_active_subscription) {
         wc_add_notice('You already subscribed this product and it\'s active', 'error');
         add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
+        WC()->cart->remove_cart_item(key($cart_items));
       }
    
   }
