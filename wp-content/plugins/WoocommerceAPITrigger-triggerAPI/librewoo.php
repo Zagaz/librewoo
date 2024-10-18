@@ -15,7 +15,7 @@ if (!defined('ABSPATH')) {
 
 define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-
+// List of files to include
 $includes = [
     'librewoo-subscribe.php',
     'librewoo-unsubscribe.php',
@@ -32,6 +32,22 @@ $includes = [
 foreach ($includes as $file) {
     include LW_PLUGIN_DIR . 'includes/' . $file;
 }
+
+
+// List of classes to instantiate
+$classes = [
+    'LibreSignAddToCartValidation',
+    'LibreSignEndpoint',
+    'LibreSignSubscribe',
+    'LibreSignUnsubscribe',
+    'LibreSignOnHold',
+    'LibreSignExpiration',
+    'LibreSignPaymentFailed',
+    'LibreSignBlockPurchaseSameSubscription', // Assuming this class exists
+    'LibreSignCheckSubscription', // Assuming this class exists
+];
+
+
 
 // Instantiate each class
 foreach ($classes as $class) {
