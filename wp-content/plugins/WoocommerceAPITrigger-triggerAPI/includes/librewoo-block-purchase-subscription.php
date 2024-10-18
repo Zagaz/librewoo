@@ -54,7 +54,7 @@ class LibreSignBlockPurchaseSameSubscriptionAndStatus
 
         // This message will be displayed to the user when the purchase is blocked.
         $message = '';
-        $message .= 'Sorry, You can\'t subscribe to this product because you already have it and it\'s <strong>';
+        $message .= 'Sorry... You can\'t subscribe to this product because you already have it and it\'s <strong>';
         $message .= '<span style="color: green; text-transform: Capitalize;">';
         // This part of the message will be replaced with the subscription status.
         $message .= $this_status;
@@ -82,6 +82,7 @@ class LibreSignBlockPurchaseSameSubscriptionAndStatus
     // Avoids conflicts with the default message "Product has been added to your cart"
     add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
   }
+  
 
   function remove_cart_item_now($cart_items)
   {
