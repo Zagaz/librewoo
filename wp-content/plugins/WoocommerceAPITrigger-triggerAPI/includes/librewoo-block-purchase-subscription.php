@@ -45,12 +45,11 @@ $user_id      = get_current_user_id();
 
 
 $subscriptions = wcs_get_users_subscriptions($user_id);
-var_dump($subscriptions);
 
-exit;
 
-      // On $subscription, filter out the parent_id and status
-      $subscription_data = array();
+
+// On $subscription, filter out the parent_id and status
+$subscription_data = array();
       foreach ($subscriptions as $sub) {
         $order = wc_get_order($sub->get_parent_id());
         $items = $order->get_items();
@@ -58,16 +57,19 @@ exit;
           $data = $item->get_data();
           $subscription_data['product_id'] = $data['product_id'];
         }
-
-        // $subscription_data[] = array(
-        //   'subscription_id' => $sub->get_id(),
-        //   'parent_id' => $sub->get_parent_id(),
-        //   'status'    => $sub->get_status(),
-        //   'product_id' => $subscription_data['product_id'],
-
-        // );
+        
+        $subscription_data[] = array(
+            'subscription_id' => $sub->get_id(),
+          'parent_id' => $sub->get_parent_id(),
+          'status'    => $sub->get_status(),
+          'product_id' => $subscription_data['product_id'],
+        
+        );
       }
-
+      var_dump ($subscription_data);
+      
+      exit;
+      
       // get the cart items
       $cart_items = WC()->cart->get_cart();
 
