@@ -35,13 +35,19 @@ class LibreSignBlockPurchaseSameSubscription
    */
   public function block_purchase_same_subscription()
   {
+    if (!is_user_logged_in()){
+      return;
 
-    if (is_user_logged_in()) {
+    }
 
-      $user_id      = get_current_user_id();
-      // get all subscriptions of the user
-      $subscriptions = wcs_get_users_subscriptions($user_id);
-      // var_dump($subscriptions);
+echo '<pre>';
+$user_id      = get_current_user_id();
+
+
+$subscriptions = wcs_get_users_subscriptions($user_id);
+var_dump($subscriptions);
+
+exit;
 
       // On $subscription, filter out the parent_id and status
       $subscription_data = array();
@@ -53,13 +59,13 @@ class LibreSignBlockPurchaseSameSubscription
           $subscription_data['product_id'] = $data['product_id'];
         }
 
-        $subscription_data[] = array(
-          'subscription_id' => $sub->get_id(),
-          'parent_id' => $sub->get_parent_id(),
-          'status'    => $sub->get_status(),
-          'product_id' => $subscription_data['product_id'],
+        // $subscription_data[] = array(
+        //   'subscription_id' => $sub->get_id(),
+        //   'parent_id' => $sub->get_parent_id(),
+        //   'status'    => $sub->get_status(),
+        //   'product_id' => $subscription_data['product_id'],
 
-        );
+        // );
       }
 
       // get the cart items
@@ -80,6 +86,6 @@ class LibreSignBlockPurchaseSameSubscription
         wc_add_notice('You already subscribed this product and it\'s active', 'error');
         add_filter('wc_add_to_cart_message_html', '__return_empty_string', 10, 2);
       }
-    }
+   
   }
 }

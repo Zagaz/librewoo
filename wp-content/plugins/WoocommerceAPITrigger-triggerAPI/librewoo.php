@@ -34,7 +34,7 @@ new LibreSignOnHold();
 new LibreSignExpiration();
 new LibreSignPaymentFailed();
 new LibreSignBlockPurchaseSameSubscription();
-new LibreSignCheckSubscription();
+// new LibreSignSubscriptionChecker();
 
 
 
