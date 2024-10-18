@@ -15,28 +15,32 @@ if (!defined('ABSPATH')) {
 
 define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-include LW_PLUGIN_DIR . 'includes/librewoo-subscribe.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-unsubscribe.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-on-hold.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-payment-failed.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-expiration.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-api-endpoint.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-block-purchase-subscription.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-check-subscription.php';
-include LW_PLUGIN_DIR . 'includes/librewoo-subscruption-status-checker.php';
 
+$includes = [
+    'librewoo-subscribe.php',
+    'librewoo-unsubscribe.php',
+    'librewoo-on-hold.php',
+    'librewoo-payment-failed.php',
+    'librewoo-expiration.php',
+    'librewoo-add-to-cart-validation.php',
+    'librewoo-api-endpoint.php',
+    'librewoo-block-purchase-subscription.php',
+    'librewoo-check-subscription.php',
+    'librewoo-subscruption-status-checker.php',
+];
 
-new LibreSignAddToCartValidation();
-new LibreSignEndpoint();
-new LibreSignSubscribe();
-new LibreSignUnsubscribe();
-new LibreSignOnHold();
-new LibreSignExpiration();
-new LibreSignPaymentFailed();
-new LibreSignBlockPurchaseSameSubscriptionAndStatus();
-new LibreSignSubscruptionStatusChecker();
+foreach ($includes as $file) {
+    include LW_PLUGIN_DIR . 'includes/' . $file;
+}
 
+// Instantiate each class
+foreach ($classes as $class) {
+    if (class_exists($class)) {
+        new $class();
+    } else {
+        error_log("Class $class does not exist.");
+    }
+}
 
 
 
