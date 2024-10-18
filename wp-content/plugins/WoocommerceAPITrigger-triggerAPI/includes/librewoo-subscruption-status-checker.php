@@ -37,7 +37,7 @@ class LibreSignSubscruptionStatusChecker
                 'parent_id' => $sub->get_parent_id(),
                 'status'    => $sub->get_status(),
                 'product_id' => $temp_item['item'],
-
+                'subscription_date_expires' => $sub->get_date('end'),
             );
         }
 
