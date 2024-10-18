@@ -41,25 +41,6 @@ class LibreSignSubscruptionStatusChecker
             );
         }
 
-             
-       
-        
-
-        
-
-
-echo "<pre>";
-
-var_dump($subscription_data);
-
-
-
-     
-
-        // var_dump(json_encode($subscription_data));
-        // echo "</pre>";
-
-
         return $subscription_data;
     }
 }
