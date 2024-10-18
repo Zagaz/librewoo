@@ -66,12 +66,12 @@ $subscription_data = array();
         
         );
       }
-      var_dump ($subscription_data);
-      
-      exit;
       
       // get the cart items
       $cart_items = WC()->cart->get_cart();
+      var_dump ($cart_items);
+      
+      exit;
 
       $cart_product_id = (reset($cart_items)['product_id']);
       for ($i = 0; $i < count($subscription_data); $i++) {
