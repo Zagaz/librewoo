@@ -13,7 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class LibreSignBlockPurchaseSameSubscription {
+class LibreSignBlockPurchaseSameSubscriptionAndActive
+{
 
     /**
      * Constructor
@@ -22,7 +23,7 @@ class LibreSignBlockPurchaseSameSubscription {
         // Add action when the user clicks on the add to cart button
         add_action(
             'woocommerce_add_to_cart',
-            array( $this, 'block_purchase_same_subscription' ),
+            array( $this, 'block_purchase_same_subscription_and_active' ),
             10,
             6
         );
@@ -31,7 +32,7 @@ class LibreSignBlockPurchaseSameSubscription {
     /**
      * Block purchase if the user already has an active subscription for the same product.
      */
-    public function block_purchase_same_subscription() {
+    public function block_purchase_same_subscription_and_active() {
         if ( ! is_user_logged_in() ) {
             return;
         }
