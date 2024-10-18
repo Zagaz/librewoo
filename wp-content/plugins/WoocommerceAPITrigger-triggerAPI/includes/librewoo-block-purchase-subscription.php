@@ -44,28 +44,7 @@ class LibreSignBlockPurchaseSameSubscriptionAndStatus
         // Check if the user has any active subscription for the same product. 
         $is_subscription_active = new LibreSignSubscruptionStatusChecker();
         $check_subs = $is_subscription_active->check_subscription_status( $user_id, $cart_product_id );
-
-        $message_active = 'You can\'t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: green; text-transform: Capitalize;">active</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        $message_on_hold = 'You can\'t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: orange; text-transform: Capitalize;">on hold</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        $message_expired = 'You can\'
-        t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: red; text-transform: Capitalize;">expired</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        $message_payment_failed = 'You can\'t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: red; text-transform: Capitalize;">payment failed</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        $message_cancelled = 'You can\'t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: red; text-transform: Capitalize;">cancelled</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        $message_suspended = 'You can\'t subscribe to this product because you already have it and it\'s <strong>
-        <span style="color: red; text-transform: Capitalize;">suspended</span></strong>. Please consider an
-        <strong><a href="#">upgrade</a> </strong> or <strong><a href="#">contact support</a></strong> if you have any questions.';
-        
-        
+  
         // If any subscription is active for the same product, block the purchase.
         for ( $i = 0; $i < count( $check_subs ); $i++ ) {
             if ( $cart_product_id == $check_subs[ $i ]['product_id'] && $check_subs[ $i ]['status'] == 'active' ) {
