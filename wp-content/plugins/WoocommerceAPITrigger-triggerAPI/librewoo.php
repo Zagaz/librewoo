@@ -15,20 +15,21 @@ if (!defined('ABSPATH')) {
 
 define('LW_PLUGIN_DIR', plugin_dir_path(__FILE__));
 
-$includes =[];
+include LW_PLUGIN_DIR . 'includes/librewoo-subscribe.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-unsubscribe.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-on-hold.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-payment-failed.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-expiration.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-add-to-cart-validation.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-api-endpoint.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-block-purchase-subscription.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-check-subscription.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-subscruption-status-checker.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-avoid-downgrade.php';
 
-// get all files in the includes directory extentions .php
-$files = scandir(LW_PLUGIN_DIR . 'includes');
 
-foreach ($files as $file) {
-    if (strpos($file, '.php') !== false) {
-        $includes[] = $file;
-    }
-}
+// make code above dynamically 
 
-foreach ($includes as $include) {
-    include LW_PLUGIN_DIR . 'includes/' . $include;
-}
 
 new LibreSignAddToCartValidation();
 new LibreSignEndpoint();
@@ -39,6 +40,7 @@ new LibreSignExpiration();
 new LibreSignPaymentFailed();
 new LibreSignBlockPurchaseSameSubscriptionAndStatus();
 new LibreSignSubscruptionStatusChecker();
+new LibreSignAvoidDowngrade();
 
 
 
