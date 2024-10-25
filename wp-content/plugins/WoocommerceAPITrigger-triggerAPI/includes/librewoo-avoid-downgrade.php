@@ -42,11 +42,21 @@ class LibreSignAvoidDowngrade
                     <strong><span style="color: green; text-transform: Capitalize;">' . $check_subs[$i]['status'] . '.</span></strong>so downgrades to this plan are not available. If you need assistance or have any questions, please contact<strong><a href="#">contact support</a></strong> if you have any questions.',
                     'error'
                 );
+             
                 wc_empty_cart();
                 wp_redirect(wc_get_cart_url());
+
+                // change add_to_cart button text to "Cannot downgrade"
+
+
                 exit;
             }
         }
+    }
+
+   public function custom_add_to_cart_button_text()
+    {
+        return 'Cannot downgrade';
     }
 
 }
