@@ -75,6 +75,12 @@ if (! defined('ABSPATH')) {
                             // disable the button
                             // change color background to gray
                             buttons[j].style.backgroundColor = 'gray';
+                            buttons[j].classList.add('disable-bt');   
+                            // The element above is part of the button, I want to dizabled the button
+                                                 
+                            //disable
+                            buttonRoot.disabled = true;
+
                            
                            
                         }
