@@ -79,6 +79,7 @@ class LibreSignSubscribe
         return $woo_client_info;
     }
 
+
     /**
      * Trigger LibreSign API
      * @return void
@@ -92,6 +93,43 @@ class LibreSignSubscribe
         $display_name = $order_data["customer_name"] . " " . $order_data["customer_last_name"];
         $quota = $order_data["purchased_items"][0]["name"];
         $apps = $authorization = "Placeholder";
+
+        // check if the user is already subscribed
+
+        $user_id = get_current_user_id();
+        $cart_item = WC()->cart->get_cart();
+
+        $is_subscription_active = new LibreSignSubscruptionStatusChecker();
+        $check_subs = $is_subscription_active->check_subscription_status( $user_id, reset( $cart_item )['product_id'] );
+
+        $is_upgradable = false;
+        //Compare the product in the cart and all the subscriptions of the user
+        // if there is a subscription with a product id less than the product in the cart, then the user is upgradable
+
+        for ( $i = 0; $i < count( $check_subs ); $i++ ) {
+            if ( reset( $cart_item )['product_id'] > $check_subs[$i]['product_id'] ) {
+                $logger1 = wc_get_logger();
+                $context = array( 'source' => 'Is_upgradable_' );
+                $logger1->info( 'User is upgradable', $context );
+                $is_upgradable = true;
+                break;
+            }
+        }
+
+
+    
+        $logger2 = wc_get_logger();
+        $context = array( 'source' => 'Is_upgradable_' );
+        $logger2->info( 'User is not upgradable', $context );
+
+
+
+
+    
+        
+
+
+
   
         $subscribe = new LibreSignEndpoint();
         $subscribe->subscribe_libreSign($email, $display_name, $quota, $apps, $authorization);

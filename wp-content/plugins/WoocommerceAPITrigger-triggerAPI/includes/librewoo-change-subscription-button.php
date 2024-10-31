@@ -68,21 +68,20 @@ if (! defined('ABSPATH')) {
                 var buttons = document.querySelectorAll('.add_to_cart_button');
                 for (var i = 0; i < product_id_button.length; i++) {
                     for (var j = 0; j < buttons.length; j++) {
+
+                        // If the user has a subscription for the same product, change the button text to "Your current subscription".
                         if (product_id_button[i] == buttons[j].getAttribute('data-product_id')) {
                             buttons[j].innerHTML = 'Your current subscription';
+                            buttons[j].style.backgroundColor = 'gray';
+                            
                         } else if (product_id_button[i] > buttons[j].getAttribute('data-product_id')) {
                             buttons[j].innerHTML = 'Unable to downgrade';
-                            // disable the button
-                            // change color background to gray
-                            buttons[j].style.backgroundColor = 'gray';
-                            buttons[j].classList.add('disable-bt');   
-                            // The element above is part of the button, I want to dizabled the button
-                                                 
-                            //disable
-                            buttonRoot.disabled = true;
-
+                             buttons[j].style.backgroundColor = 'gray';
+       
                            
-                           
+                        } else {
+                            buttons[j].innerHTML = 'Upgrade';
+                            buttons[j].style.backgroundColor = 'green';
                         }
                     }
                 }

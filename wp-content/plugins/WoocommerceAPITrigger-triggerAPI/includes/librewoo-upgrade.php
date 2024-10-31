@@ -12,7 +12,33 @@ class LibreSignUpgrade
 {
     public function __construct()
     {
-        add_action('woocommerce_add_to_cart', array($this, 'upgrade_subscription'));
+        
+        add_action('woocommerce_order_status_completed', array($this, 'cancel_previous_subscriptions'));
+    }
+
+    public function cancel_previous_subscriptions($order_id)
+    {
+        // error log for debugging
+        
+
+
+
+        // erroe log for debugging
+      
+        
+        // $order = wc_get_order($order_id);
+        // $user_id = $order->get_user_id();
+        // $items = $order->get_items();
+        // $product_id = $items[0]->get_product_id();
+
+        // $is_subscription_active = new LibreSignSubscruptionStatusChecker();
+        // $check_subs = $is_subscription_active->check_subscription_status($user_id, $product_id);
+
+        // for ($i = 0; $i < count($check_subs); $i++) {
+        //     $subscription_id = $check_subs[$i]['subscription_id'];
+        //     $subscription = wcs_get_subscription($subscription_id);
+        //     $subscription->cancel_order($order_id);
+        // }
     }
 
     public function upgrade_subscription()
@@ -32,13 +58,8 @@ class LibreSignUpgrade
         // If any subscription product ID is lesser than the cart product ID, allow the purchase.
         for ( $i = 0; $i < count($check_subs); $i++ ) {
             if ($cart_product_id > $check_subs[$i]['product_id']) {
-                wc_add_notice(
-                    'You already have a subscription to a lower-tier product with the status
-                    <strong><span style="color: green; text-transform: Capitalize;">' . $check_subs[$i]['status'] . '.</span></strong>so upgrades to this plan are available. If you need assistance or have any questions, please contact<strong><a href="#">contact support</a></strong> if you have any questions.',
-                    'success'
-                );
-             
-                // change add_to_cart button text to "Cannot upgrade"
+                      
+                // change add_to_cart button text to "Upgrade"
                 add_filter('woocommerce_product_add_to_cart_text', array($this, 'custom_add_to_cart_button_text'));
                break;
             }

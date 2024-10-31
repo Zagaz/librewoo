@@ -27,6 +27,11 @@ define( 'NONCE_SALT', 'KVaYcfGKVfAyYqZtEDpSCYzfiPoSyUoHDsTakbRlucmXXchhuiQktrtuh
 
 
 
+define( 'WP_DEBUG', true );
+define( 'SCRIPT_DEBUG', true );
+define( 'WP_DEBUG_LOG', '/var/www/html/wp-content/uploads/debug-log-manager/librewooddevsite_20240919224187600557_debug.log' );
+define( 'WP_DEBUG_DISPLAY', false );
+define( 'DISALLOW_FILE_EDIT', false );
 /* That's all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */

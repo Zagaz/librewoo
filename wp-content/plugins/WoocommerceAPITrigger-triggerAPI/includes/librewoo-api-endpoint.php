@@ -94,6 +94,31 @@ class LibreSignEndpoint
     }
 
     /**
+     * Cancel subscription
+     * IMPORTANT: Once cancelled, the user loses this access to the service permanently.
+     * The subscription can salso be cancelled if it's an upgrade.
+     * 
+     */
+
+    public function cancel_libreSign($subscription)
+    { 
+
+        ?>
+        <script>
+            alert("Subscription cancelled");
+        </script>
+        <?php
+        
+        
+        $subscription_id = $subscription->get_id();
+        $this->logAPI("Subscription cancelled ID:" . $subscription_id);
+    }
+
+
+
+
+
+    /**
      * Hold subscription
      * IMPORTANT: Tipically occurs when the user has not paid the subscription fee
      * but there is still a chance to recover the user.
@@ -145,6 +170,6 @@ class LibreSignEndpoint
     {
         $context = array('source' => 'LibreSignAPI----');
         $logger = wc_get_logger();
-        $logger->info($content, $context);
+        $logger->info('test' .$content, $context);
     }
 }

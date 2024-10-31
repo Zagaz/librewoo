@@ -48,7 +48,6 @@ class LibreSignAvoidDowngrade
 
                 // change add_to_cart button text to "Cannot downgrade"
 
-
                 exit;
             }
         }
