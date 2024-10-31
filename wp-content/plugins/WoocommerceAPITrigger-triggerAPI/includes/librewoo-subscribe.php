@@ -113,14 +113,13 @@ class LibreSignSubscribe
                 $logger1->info( 'User is upgradable', $context );
                 $is_upgradable = true;
                 break;
+            } else{
+                $logger2 = wc_get_logger();
+                $context = array( 'source' => 'Is_upgradable_' );
+                $logger2->info( 'User is not upgradable', $context );
             }
         }
 
-
-    
-        $logger2 = wc_get_logger();
-        $context = array( 'source' => 'Is_upgradable_' );
-        $logger2->info( 'User is not upgradable', $context );
 
 
 
