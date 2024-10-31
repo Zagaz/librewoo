@@ -27,6 +27,7 @@ include LW_PLUGIN_DIR . 'includes/librewoo-check-subscription.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-subscruption-status-checker.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-avoid-downgrade.php';
 include LW_PLUGIN_DIR . 'includes/librewoo-change-subscription-button.php';
+include LW_PLUGIN_DIR . 'includes/librewoo-upgrade.php';
 
 
 // make code above dynamically 
@@ -43,6 +44,7 @@ new LibreSignBlockPurchaseSameSubscriptionAndStatus();
 new LibreSignSubscruptionStatusChecker();
 new LibreSignAvoidDowngrade();
 new LibreSignChangeSubscriptionButton();
+new LibreSignUpgrade();
 
 
 
