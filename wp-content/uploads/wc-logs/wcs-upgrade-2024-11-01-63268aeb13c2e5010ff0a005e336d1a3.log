@@ -1,0 +1,13 @@
+2024-11-01T01:38:12+00:00 NOTICE 3.1.0 - No subscription webhooks found using API version 3. No updates needed. CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE 7.5.0 upgrade complete from Subscriptions v0 while WooCommerce WC_VERSION 9.3.3 and database version 9.3.3 was active. CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE Environment info: CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     WordPress Version : 6.6.2 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE Active Plugins: CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     Query Monitor by John Blackbourn – 3.16.4 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     Woo Order Complete Message by Libre Code – 1.0.1 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     Code Snippets by Code Snippets Pro – 3.6.5.1 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     Debug Bar by wordpressdotorg – 1.1.6 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     Debug Log Manager by Bowo – 2.3.3 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     WooCommerce Stripe Gateway by WooCommerce – 8.7.0 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     WooCommerce Subscriptions by WooCommerce – 6.7.0 CONTEXT: {"_legacy":true}
+2024-11-01T01:38:12+00:00 NOTICE     WooCommerce by Automattic – 9.3.3 CONTEXT: {"_legacy":true}
