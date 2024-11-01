@@ -48,6 +48,24 @@ class LibreSignSubscribe
         // Get order data and trigger API
         $order_data = $this->get_order_data($order);
         $this->librewoo_trigger($order_data);
+
+        $is_update = $this->is_update() ? "true" : "false";
+
+        if ($is_update) {
+            $logger = wc_get_logger();
+            $logger->info("Subscription updated", ["source" => "librewoo"]);
+            $msg = "Subscription updated";
+        } else {
+            $msg = "Subscription created";
+        }
+
+        $logger = wc_get_logger();
+        $context = ["source" => "UPDATE:  "];
+        $logger->info($msg, $context);
+
+
+
+
     }
 
     /**
@@ -89,7 +107,7 @@ class LibreSignSubscribe
     {
         $is_update = $this->is_update() ? "true" : "false";
 
-       
+
 
 
         // Convert stdClass to array
@@ -105,23 +123,19 @@ class LibreSignSubscribe
         // Trigger API Update
 
 
-  
+
 
     }
 
-    private function is_update(){
+    private function is_update()
+    {
         // check subscriptions
         $user_id = get_current_user_id();
         $subscriptions = wcs_get_users_subscriptions($user_id);
-        if(count($subscriptions) > 0){
+        if (count($subscriptions) > 0) {
             return true;
         } else {
             return false;
         }
-        
     }
-
-
-
-
 }
